@@ -1,0 +1,123 @@
+/* General Navbar Styling (Desktop) */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Navigation Links (Left Side) */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00aaff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: #00aaff;
+}
+
+/* Right Side: Dark Mode Toggle & Buttons */
+.reg-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Sign In & Sign Up Buttons */
+.reg-btn .signin,
+.reg-btn .signup {
+  padding: 8px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+}
+
+.reg-btn .signin {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.reg-btn .signin:hover {
+  background: white;
+  color: black;
+}
+
+.reg-btn .signup {
+  background: #00aaff;
+  color: white;
+  border: none;
+}
+
+.reg-btn .signup:hover {
+  background: #0088cc;
+}
+
+/* Hide Mobile Navbar by Default */
+.bottom-nav {
+  display: none;
+}
+
+/* Mobile Responsive Styling */
+@media (max-width: 768px) {
+  /* Hide Desktop Navbar on Mobile */
+  .navbar {
+    display: none;
+  }
+
+  /* Show Bottom Navigation Bar (Mobile Only) */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #121212;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .bottom-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color 0.3s;
+  }
+
+  .bottom-nav a:hover {
+    color: #00aaff;
+  }
+
+  /* Move Dark/Light Button to Top Right */
+  .dark-light-toggle {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+}

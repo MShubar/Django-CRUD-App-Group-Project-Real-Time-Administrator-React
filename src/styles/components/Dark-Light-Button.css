@@ -1,0 +1,162 @@
+body {
+  background-color: #0099ff;
+}
+
+/* dark to light */
+/* button */
+.Dark-Light-Mode-Button {
+  padding: 20px 60px;
+  border-radius: 100px;
+  border: none;
+  background-color: #010825;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 1s ease;
+}
+.Dark-Light-Mode-Button:hover {
+  background-color: #2391f8;
+}
+
+/* text */
+.Dark-Light-Mode-text {
+  color: #fff;
+  font-size: 15px;
+  position: relative;
+  right: 27px;
+  top: -5px;
+  z-index: 2;
+  transition: all 1s ease;
+}
+.Dark-Light-Mode-Button:hover .Dark-Light-Mode-text {
+  right: -3px;
+}
+
+/* sun  */
+.Dark-Light-Mode-Button::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  right: -20px;
+  top: -10px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 15px rgba(255, 255, 255, 0.6);
+  z-index: 1;
+  transition: all 1s ease;
+}
+.Dark-Light-Mode-Button:hover::before {
+  right: 130px;
+  background-color: #ffff00;
+}
+
+/* clouds */
+.Dark-Light-Mode-cloud {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  z-index: 1;
+}
+.Dark-Light-Mode-cloud:nth-of-type(2) {
+  width: 40px;
+  left: 10px;
+  bottom: -20px;
+}
+
+.Dark-Light-Mode-cloud:nth-of-type(3) {
+  width: 60px;
+  left: 40px;
+  bottom: -40px;
+}
+.Dark-Light-Mode-cloud:nth-of-type(4) {
+  width: 50px;
+  left: 80px;
+  bottom: -40px;
+}
+.Dark-Light-Mode-cloud:nth-of-type(5) {
+  width: 80px;
+  left: 110px;
+  bottom: -60px;
+}
+
+/* light to dark */
+
+/* button */
+.Light-Dark-Mode-Button {
+  padding: 20px 60px;
+  border-radius: 100px;
+  border: none;
+  background-color: #23dff8;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 1s ease;
+}
+.Light-Dark-Mode-Button:hover {
+  background-color: #010825;
+}
+
+/* text */
+.Light-Dark-Mode-text {
+  color: #fff;
+  font-size: 15px;
+  position: relative;
+  left: 30px;
+  top: -5px;
+  z-index: 2;
+  transition: all 1s ease;
+}
+.Light-Dark-Mode-Button:hover .Light-Dark-Mode-text {
+  left: -3px;
+}
+
+/* sun  */
+.Light-Dark-Mode-Button::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: #ffff00;
+  left: -20px;
+  top: -10px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 15px rgba(255, 255, 255, 0.6);
+  z-index: 1;
+  transition: all 1s ease;
+}
+.Light-Dark-Mode-Button:hover::before {
+  left: 130px;
+  background-color: #fff;
+}
+
+/* clouds */
+.Light-Dark-Mode-cloud {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  z-index: 1;
+}
+.Light-Dark-Mode-cloud:nth-of-type(2) {
+  width: 40px;
+  left: 10px;
+  bottom: -20px;
+}
+
+.Light-Dark-Mode-cloud:nth-of-type(3) {
+  width: 60px;
+  left: 40px;
+  bottom: -40px;
+}
+.Light-Dark-Mode-cloud:nth-of-type(4) {
+  width: 50px;
+  left: 80px;
+  bottom: -40px;
+}
+.Light-Dark-Mode-cloud:nth-of-type(5) {
+  width: 80px;
+  left: 110px;
+  bottom: -60px;
+}
