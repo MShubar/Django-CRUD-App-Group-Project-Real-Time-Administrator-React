@@ -2,7 +2,10 @@ import { NavLink } from 'react-router-dom'
 import '../styles/components/Navbar.css'
 import LightDark from './Dark-Light-Button'
 
-function Navbar() {
+function Navbar({ isAuthenticated, onLogout }) {
+  const handleClick = () => {
+    onLogout()
+  }
   return (
     <>
       {/* Desktop Navbar (Only Visible on Desktop) */}
@@ -11,16 +14,26 @@ function Navbar() {
           <NavLink to="/" className="logo">
             RTA
           </NavLink>
-          <NavLink to="/">Home</NavLink>
+          {!isAuthenticated && <NavLink to="/">Home</NavLink>}
+          {isAuthenticated && <NavLink to="/dashboard">Dashboard</NavLink>}
         </div>
         <div className="reg-btn">
           <LightDark />
-          <NavLink to="/signin" className="signin">
-            Sign In
-          </NavLink>
-          <NavLink to="/signup" className="signup">
-            Sign Up
-          </NavLink>
+          {!isAuthenticated && (
+            <NavLink to="/signin" className="signin">
+              Sign In
+            </NavLink>
+          )}
+          {!isAuthenticated && (
+            <NavLink to="/signup" className="signup">
+              Sign Up
+            </NavLink>
+          )}
+          {isAuthenticated && (
+            <NavLink to="/" onClick={handleClick} className="signin">
+              Log out
+            </NavLink>
+          )}
         </div>
       </section>
 
@@ -35,6 +48,9 @@ function Navbar() {
         </NavLink>
         <NavLink to="/signup" className="signup">
           Sign Up
+        </NavLink>
+        <NavLink to="/" onClick={handleClick} className="signin">
+          Log out
         </NavLink>
       </nav>
     </>

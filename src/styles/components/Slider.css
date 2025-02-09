@@ -1,0 +1,37 @@
+.slider-container {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center; /* Center-align the heading and slider content */
+}
+
+.services-heading {
+  margin-bottom: 20px; /* Add some space below the heading */
+}
+
+/* Add gap between cards */
+.slick-slide > div {
+  margin: 0 10px; /* Adjust the margin to control the gap */
+}
+
+.service-card {
+  padding: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 200px; /* Adjust height as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.service-card h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: #666;
+}

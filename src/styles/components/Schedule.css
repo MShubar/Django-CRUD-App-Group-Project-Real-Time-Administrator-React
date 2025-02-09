@@ -1,0 +1,14 @@
+.schedule {
+  border: 5px solid black;
+  height: 70vh;
+}
+
+.title {
+  margin: 0;
+  border: 5px solid black;
+  width: 5%;
+  text-align: center;
+  vertical-align: center;
+  font-size: 220%;
+  height: 10%;
+}
