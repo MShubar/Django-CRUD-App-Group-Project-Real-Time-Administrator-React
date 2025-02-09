@@ -26,7 +26,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/signin"
-          element={<Signin handleLogin={handleLogin} setUser={setUser} />}
+          element={
+            <Signin handleLogin={handleLogin} user={user} setUser={setUser} />
+          }
         />
         <Route path="/signup" element={<Signup />} />
         {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}

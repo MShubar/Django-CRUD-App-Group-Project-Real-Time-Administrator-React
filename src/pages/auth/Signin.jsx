@@ -7,7 +7,7 @@ const initialFormData = {
   email: '',
   password: ''
 }
-function Signin({ handleLogin, setUser }) {
+function Signin({ handleLogin, setUser, user }) {
   const [formData, setFormData] = useState(initialFormData)
   const navigate = useNavigate()
 
@@ -21,18 +21,25 @@ function Signin({ handleLogin, setUser }) {
       email: formData.email,
       password: formData.password
     }
-    const response = await fetch(`${BASE_URL}/users/signin`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formDataToSend)
-    })
-    setUser(response.data.user)
-    const token = response.data.token
-    localStorage.setItem('token', token)
-    localStorage.setItem('userId', response.data.user._id)
-    handleLogin()
-    navigate('/dashboard')
-    setFormData(initialFormData)
+    try {
+      const response = await fetch(`${BASE_URL}/users/signin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formDataToSend)
+      }).then((response) => response.json())
+      console.log(response)
+
+      setUser(response.user)
+      const token = response.token
+      localStorage.setItem('token', token)
+      localStorage.setItem('userId', response.user._id)
+      handleLogin()
+      console.log('Login')
+      navigate('/dashboard')
+      setFormData(initialFormData)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
