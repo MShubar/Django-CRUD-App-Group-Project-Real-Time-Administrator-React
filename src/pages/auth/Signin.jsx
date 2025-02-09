@@ -7,7 +7,7 @@ const initialFormData = {
   email: '',
   password: ''
 }
-function Signin({ handleLogin, setUser, user }) {
+function Signin({ handleLogin, setUser }) {
   const [formData, setFormData] = useState(initialFormData)
   const navigate = useNavigate()
 

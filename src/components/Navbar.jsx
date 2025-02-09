@@ -8,12 +8,18 @@ function Navbar({ isAuthenticated, onLogout }) {
   }
   return (
     <>
-      {/* Desktop Navbar (Only Visible on Desktop) */}
       <section className="navbar">
         <div className="nav-links">
-          <NavLink to="/" className="logo">
-            RTA
-          </NavLink>
+          {!isAuthenticated && (
+            <NavLink to="/" className="logo">
+              RTA
+            </NavLink>
+          )}
+          {isAuthenticated && (
+            <NavLink to="/dashboard" className="logo">
+              RTA
+            </NavLink>
+          )}
           {!isAuthenticated && <NavLink to="/">Home</NavLink>}
           {isAuthenticated && <NavLink to="/dashboard">Dashboard</NavLink>}
         </div>
@@ -37,7 +43,6 @@ function Navbar({ isAuthenticated, onLogout }) {
         </div>
       </section>
 
-      {/* Mobile Bottom Navbar (Only Visible on Mobile) */}
       <nav className="bottom-nav">
         <NavLink to="/" className="logo">
           RTA
