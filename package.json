@@ -10,10 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "framer-motion": "^12.4.1",
-    "mdb-react-ui-kit": "^9.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
