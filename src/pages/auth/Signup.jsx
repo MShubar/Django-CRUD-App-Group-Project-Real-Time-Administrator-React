@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BASE_URL } from '../../servers/config'
 import '../../styles/auth/Signup.css' // Import the CSS file
-
+import { useNavigate } from 'react-router-dom'
 function Signup() {
   const [formData, setFormData] = useState({
     name: '',
@@ -14,36 +14,41 @@ function Signup() {
     email: '',
     password: ''
   })
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
+  const handleFileChange = (e) => {
+    const { name, files } = e.target
+    setFormData((prev) => ({ ...prev, [name]: files[0] })) // Store the file object
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const formDataToSend = {
-      name: formData.name,
-      address: formData.address,
-      crNumber: formData.crNumber,
-      phone: formData.phone,
-      size: formData.size,
-      logoImage: 'sample-logo-url',
-      crDocument: 'sample-document-url',
-      email: formData.email,
-      password: formData.password
-    }
+    const formDataToSend = new FormData()
+    formDataToSend.append('name', formData.name)
+    formDataToSend.append('address', formData.address)
+    formDataToSend.append('crNumber', formData.crNumber)
+    formDataToSend.append('phone', formData.phone)
+    formDataToSend.append('size', formData.size)
+    formDataToSend.append('logoImage', formData.logoImage) // Append file
+    formDataToSend.append('crDocument', formData.crDocument) // Append file
+    formDataToSend.append('email', formData.email)
+    formDataToSend.append('password', formData.password)
 
     const response = await fetch(`${BASE_URL}/companies/signup`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formDataToSend)
+      body: formDataToSend // No need for headers (browser sets automatically for FormData)
     })
 
     const data = await response.json()
     if (response.ok) {
       alert('Signup successful!')
+      navigate('/signin')
     } else {
       alert(`Signup failed: ${data.error}`)
     }
@@ -88,10 +93,25 @@ function Signup() {
           onChange={handleChange}
           required
         />
+
         <label>Upload Logo:</label>
-        <input type="text" name="logoImage" onChange={handleChange} required />
+        <input
+          type="file"
+          name="logoImage"
+          accept="image/*"
+          onChange={handleFileChange}
+          required
+        />
+
         <label>Upload CR Document:</label>
-        <input type="text" name="crDocument" onChange={handleChange} required />
+        <input
+          type="file"
+          name="crDocument"
+          accept=".pdf,.jpg,.png"
+          onChange={handleFileChange}
+          required
+        />
+
         <input
           type="email"
           name="email"
