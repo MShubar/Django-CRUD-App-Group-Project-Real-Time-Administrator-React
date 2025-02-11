@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Signin from './pages/auth/Signin'
 import Signup from './pages/auth/Signup'
 import Dashboard from './pages/home/Dashboard'
+import DepartmentForm from './pages/department/DepartmentForm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
@@ -14,6 +15,29 @@ import { BASE_URL } from './servers/config'
 function App() {
   const [user, setUser] = useState()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [departments, setDepartments] = useState([])
+
+  const getDepartments = async () => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      try {
+        const response = await fetch('/api/departments', {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        const data = await response.json()
+        setDepartments(data) 
+      } catch (error) {
+        console.error('Error fetching departments:', error)
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getDepartments()
+    }
+  }, [isAuthenticated])
+
   const [employees, setEmployees] = useState([])
   const handleLogin = () => {
     setIsAuthenticated(true)
@@ -67,6 +91,12 @@ function App() {
         />
         <Route path="/signup" element={<Signup />} />
         {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}
+        {user ? (
+          <>
+          <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />}/>
+          </>
+        ) : null }
+
         {user ? <Route path="/employees" element={<EmployeeList employees={employees} user={user}/>} /> : null}
         {user ? <Route path="/employees/:id" element={<EmployeeDetails employees={employees} user={user}/>} /> : null}
         {user ? <Route path="/employees/update/:id" element={<EmployeeUpdateForm employees={employees} user={user}/>} /> : null}
