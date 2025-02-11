@@ -1,0 +1,35 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 30px;
+  color: white;
+  position: relative;
+  height: 30vh;
+}
+
+.column {
+  height: 100%;
+  width: 30%;
+  box-shadow: 6px 4px 6px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20%;
+  gap: 5%;
+  text-align: center;
+}
+.copyright {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 30px;
+  color: white;
+  position: relative;
+  height: 10vh;
+}
+.column2 {
+  height: 100%;
+  width: 100%;
+  box-shadow: 6px 4px 6px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20%;
+  gap: 5%;
+  text-align: center;
+}
