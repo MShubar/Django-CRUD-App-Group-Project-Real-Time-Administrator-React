@@ -6,6 +6,7 @@ import Signin from './pages/auth/Signin'
 import Signup from './pages/auth/Signup'
 import Dashboard from './pages/home/Dashboard'
 import { useState } from 'react'
+import './styles/App.css'
 
 function App() {
   const [user, setUser] = useState()
