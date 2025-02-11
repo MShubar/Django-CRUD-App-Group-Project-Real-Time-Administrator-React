@@ -22,6 +22,7 @@ function Navbar({ isAuthenticated, onLogout }) {
           )}
           {!isAuthenticated && <NavLink to="/">Home</NavLink>}
           {isAuthenticated && <NavLink to="/dashboard">Dashboard</NavLink>}
+          {isAuthenticated && <NavLink to="/employees">Employee</NavLink>}
         </div>
         <div className="reg-btn">
           <LightDark />
