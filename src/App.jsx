@@ -11,7 +11,6 @@ import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
 import { useState, useEffect } from 'react'
 import { BASE_URL } from './servers/config'
 
-
 function App() {
   const [user, setUser] = useState()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
