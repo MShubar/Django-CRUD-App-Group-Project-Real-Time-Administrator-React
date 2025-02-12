@@ -6,6 +6,9 @@ import Signin from './pages/auth/Signin'
 import Signup from './pages/auth/Signup'
 import Dashboard from './pages/home/Dashboard'
 import DepartmentForm from './pages/department/DepartmentForm'
+import DepartmentDetails from './pages/department/DepartmentDetails'
+import DepartmentList from './pages/department/DepartmentList'
+import DepartmentUpdateForm from './pages/department/DepartmentUpdateForm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
@@ -92,10 +95,13 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}
         {user ? (
-          <>
-          <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />}/>
-          </>
-        ) : null }
+        <>
+        <Route path="/departmentlist" element={<DepartmentList />} />
+        <Route path="/departments/:id" element={<DepartmentDetails />} />
+        <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
+        <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
+        </>
+        ) : null}
 
         {user ? <Route path="/employees" element={<EmployeeList employees={employees} user={user}/>} /> : null}
         {user ? <Route path="/employees/:id" element={<EmployeeDetails employees={employees} user={user}/>} /> : null}
