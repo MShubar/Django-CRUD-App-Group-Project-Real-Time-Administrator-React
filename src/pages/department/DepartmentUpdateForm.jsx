@@ -78,3 +78,4 @@ const DepartmentUpdateForm = ({ departments, setDepartments }) => {
     );
   };
   
+  export default DepartmentUpdateForm
