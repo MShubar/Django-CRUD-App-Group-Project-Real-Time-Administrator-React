@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom'
 
 const Shift = ({ shift }) => {
@@ -13,6 +14,7 @@ const Shift = ({ shift }) => {
         </div>
       </Link>
     )
+
 }
 
 export default Shift
