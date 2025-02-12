@@ -1,9 +1,5 @@
-import { Link } from 'react-router-dom'
-
 const Shift = () => {
-
-    return (
-    )
+  return <></>
 }
 
 export default Shift
