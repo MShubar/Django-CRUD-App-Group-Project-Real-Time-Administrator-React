@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { BASE_URL } from '../../servers/config';
 import { Link } from 'react-router-dom'
 
-
 const EmployeeDetails = () => {
   const { id } = useParams(); // Get the employee ID from the URL
   const [employee, setEmployee] = useState(null);
@@ -39,7 +38,7 @@ const EmployeeDetails = () => {
   }
 
   return (
-    <div className="employee-details">
+    <div className="signup-container">
       <h2>Employee Details</h2>
       <p><strong>Name:</strong> {employee.name}</p>
       <p><strong>Position:</strong> {employee.position}</p>

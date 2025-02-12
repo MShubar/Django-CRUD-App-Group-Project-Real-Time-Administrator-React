@@ -1,7 +1,7 @@
 // AddEmployeeForm.jsx
 import React, { useState } from 'react';
 
-const AddEmployeeForm = ({ onAdd }) => {
+const EmployeeForm = ({ onAdd , user, departments}) => {
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [companyId, setCompanyId] = useState('');
@@ -15,7 +15,7 @@ const AddEmployeeForm = ({ onAdd }) => {
     // Clear the form
     setName('');
     setPosition('');
-    setCompanyId('');
+    setCompanyId(user._id);
     setDepartmentId('');
     setStatus('');
   };
@@ -38,20 +38,22 @@ const AddEmployeeForm = ({ onAdd }) => {
         onChange={(e) => setPosition(e.target.value)}
         required
       />
-      <input
-        type="text"
-        placeholder="Company ID"
-        value={companyId}
-        onChange={(e) => setCompanyId(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Department ID"
-        value={departmentId}
-        onChange={(e) => setDepartmentId(e.target.value)}
-        required
-      />
+      
+      <select
+              id="departmentId"
+              name="departmentId"
+              className="form-control border border-success rounded-3 shadow-sm"
+              onChange={(e) => setName(e.target.value)}
+              
+              required
+            >
+              <option value="">Select Department</option>
+              {departments.map((department) => (
+                <option key={department._id} value={department._id}>
+                  {department.name} {/* Adjust the display value as needed */}
+                </option>
+              ))}
+            </select>
       <input
         type="text"
         placeholder="Status"
@@ -65,4 +67,4 @@ const AddEmployeeForm = ({ onAdd }) => {
   );
 };
 
-export default AddEmployeeForm;
+export default EmployeeForm;

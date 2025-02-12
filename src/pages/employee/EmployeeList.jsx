@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Employee from '../../components/Employee'
 import { NavLink } from 'react-router-dom'
-import AddEmployeeForm from './EmployeeForm'
+import EmployeeForm from './EmployeeForm'
 import EmployeeDetails from './EmployeeDetails'; // Import the new details component
 
-const EmployeeList = ({ employees }) => {
+const EmployeeList = ({ employees, user, departments }) => {
+  
+  
   const [showForm, setShowForm] = useState(false); // State to control the add form visibility
   const [selectedEmployee, setSelectedEmployee] = useState(null); // State to hold the selected employee for details
 
@@ -29,7 +31,7 @@ const EmployeeList = ({ employees }) => {
           {showForm ? 'Cancel' : 'New Employee'}
         </button>
       </div>
-      {showForm && <AddEmployeeForm onAdd={handleAddEmployee} />}
+      {showForm && <EmployeeForm onAdd={handleAddEmployee} user={user} departments={departments}/>}
       
       <section className="employee-list">
         <div className="row gy-3">
