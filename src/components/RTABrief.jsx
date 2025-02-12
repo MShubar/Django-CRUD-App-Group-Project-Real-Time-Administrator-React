@@ -20,7 +20,7 @@ function RTABrief() {
   return (
     <section className="rta-brief">
       <motion.div
-        className="title"
+        className="title text-white"
         variants={titleVariants}
         initial="hidden"
         whileInView="visible"

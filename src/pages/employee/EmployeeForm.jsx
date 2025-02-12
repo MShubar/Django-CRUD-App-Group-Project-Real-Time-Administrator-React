@@ -1,5 +1,5 @@
 // AddEmployeeForm.jsx
-import React, { useState } from 'react';
+import { useState } from 'react'
 
 const EmployeeForm = ({ onAdd , user, departments}) => {
   const [name, setName] = useState('');
@@ -9,9 +9,9 @@ const EmployeeForm = ({ onAdd , user, departments}) => {
   const [status, setStatus] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const newEmployee = { name, position, companyId, departmentId, status };
-    onAdd(newEmployee);
+    e.preventDefault()
+    const newEmployee = { name, position, companyId, departmentId, status }
+    onAdd(newEmployee)
     // Clear the form
     setName('');
     setPosition('');
@@ -64,7 +64,7 @@ const EmployeeForm = ({ onAdd , user, departments}) => {
       <button type="submit">Add Employee</button>
     </form>
     </div>
-  );
-};
+  )
+}
 
 export default EmployeeForm;

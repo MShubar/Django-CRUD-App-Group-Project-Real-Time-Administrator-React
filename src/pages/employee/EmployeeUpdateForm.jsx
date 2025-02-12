@@ -121,4 +121,4 @@ const EmployeeUpdateForm = () => {
   );
 };
 
-export default EmployeeUpdateForm;
+export default EmployeeUpdateForm

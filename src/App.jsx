@@ -6,6 +6,9 @@ import Signin from './pages/auth/Signin'
 import Signup from './pages/auth/Signup'
 import Dashboard from './pages/home/Dashboard'
 import DepartmentForm from './pages/department/DepartmentForm'
+import DepartmentDetails from './pages/department/DepartmentDetails'
+import DepartmentList from './pages/department/DepartmentList'
+import DepartmentUpdateForm from './pages/department/DepartmentUpdateForm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
@@ -26,7 +29,7 @@ function App() {
           headers: { Authorization: `Bearer ${token}` }
         })
         const data = await response.json()
-        setDepartments(data) 
+        setDepartments(data)
       } catch (error) {
         console.error('Error fetching departments:', error)
       }
@@ -45,30 +48,29 @@ function App() {
   }
   useEffect(() => {
     const getAllEmployees = async () => {
-      const token = localStorage.getItem('token');
-      //console.log("Token:", token); 
-          if (token) {
+      const token = localStorage.getItem('token')
+      //console.log("Token:", token);
+      if (token) {
         try {
           const response = await fetch(`${BASE_URL}/employees`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}` 
+              Authorization: `Bearer ${token}`
             }
-          });
-          const data = await response.json(); 
-    
+          })
+          const data = await response.json()
+
           if (!response.ok) {
-            console.error('Error fetching employees:', data.message); // Log any error messages
+            console.error('Error fetching employees:', data.message) // Log any error messages
             if (response.status === 401) {
-              console.error('Unauthorized access, redirecting to sign-in');
-              
+              console.error('Unauthorized access, redirecting to sign-in')
             }
-            return; 
+            return
           }
-          setEmployees(data); // Set the employees state
+          setEmployees(data) // Set the employees state
         } catch (error) {
-          console.error('Error fetching employees:', error);
+          console.error('Error fetching employees:', error)
         }
       }
     }
@@ -114,7 +116,7 @@ function App() {
             />
           ) : null}
       </Routes>
-      <Footer />
+      <Footer isAuthenticated={isAuthenticated} />
     </>
   )
 }
