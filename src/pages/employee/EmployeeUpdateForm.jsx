@@ -1,28 +1,28 @@
 // EmployeeUpdateForm.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 const EmployeeUpdateForm = ({ employee, onUpdate, onCancel }) => {
-  const [name, setName] = useState('');
-  const [position, setPosition] = useState('');
-  const [companyId, setCompanyId] = useState('');
-  const [departmentId, setDepartmentId] = useState('');
-  const [status, setStatus] = useState('');
+  const [name, setName] = useState('')
+  const [position, setPosition] = useState('')
+  const [companyId, setCompanyId] = useState('')
+  const [departmentId, setDepartmentId] = useState('')
+  const [status, setStatus] = useState('')
 
   useEffect(() => {
     if (employee) {
-      setName(employee.name);
-      setPosition(employee.position);
-      setCompanyId(employee.companyId);
-      setDepartmentId(employee.departmentId);
-      setStatus(employee.status);
+      setName(employee.name)
+      setPosition(employee.position)
+      setCompanyId(employee.companyId)
+      setDepartmentId(employee.departmentId)
+      setStatus(employee.status)
     }
-  }, [employee]);
+  }, [employee])
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const updatedEmployee = { name, position, companyId, departmentId, status };
-    onUpdate(updatedEmployee);
-  };
+    e.preventDefault()
+    const updatedEmployee = { name, position, companyId, departmentId, status }
+    onUpdate(updatedEmployee)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -63,9 +63,11 @@ const EmployeeUpdateForm = ({ employee, onUpdate, onCancel }) => {
         required
       />
       <button type="submit">Update Employee</button>
-      <button type="button" onClick={onCancel}>Cancel</button>
+      <button type="button" onClick={onCancel}>
+        Cancel
+      </button>
     </form>
-  );
-};
+  )
+}
 
-export default EmployeeUpdateForm;
+export default EmployeeUpdateForm

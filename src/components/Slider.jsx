@@ -79,7 +79,7 @@ const ServicesSlider = () => {
   return (
     <div className="slider-container">
       <motion.h2
-        className="services-heading"
+        className="services-heading text-white"
         variants={headingVariants}
         initial="hidden"
         whileInView="visible"
