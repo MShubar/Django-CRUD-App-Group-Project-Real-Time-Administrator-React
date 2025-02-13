@@ -12,6 +12,7 @@ import DepartmentUpdateForm from './pages/department/DepartmentUpdateForm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
+import DeleteEmployee from './pages/employee/DeleteEmployee'; 
 import { useState, useEffect } from 'react'
 import { BASE_URL } from './servers/config'
 
@@ -100,27 +101,22 @@ function App() {
         <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
         <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
         </>
-
         ) : null}
-
+        {user ? <Route path="/employees" element={<EmployeeList employees={employees} user={user} departments={departments}/>} /> : null}
+        {user ? <Route path="/employees/:id" element={<EmployeeDetails employees={employees} user={user}/>} /> : null}
+        {user ? <Route path="/employees/update/:id" element={<EmployeeUpdateForm employees={employees} user={user} />} /> : null}
         {user ? (
-          <Route
-            path="/employees"
-            element={<EmployeeList employees={employees} user={user} />}
-          />
-        ) : null}
-        {user ? (
-          <Route
-            path="/employees/:id"
-            element={<EmployeeDetails employees={employees} user={user} />}
-          />
-        ) : null}
-        {user ? (
-          <Route
-            path="/employees/update/:id"
-            element={<EmployeeUpdateForm employees={employees} user={user} />}
-          />
-        ) : null}
+            <Route
+              path="/employees/delete/:id"
+              element={
+                <DeleteEmployee
+                employees={employees}
+                  setEmployees={setEmployees}
+                  user={user}
+                />
+              }
+            />
+          ) : null}
       </Routes>
       <Footer isAuthenticated={isAuthenticated} />
     </>
