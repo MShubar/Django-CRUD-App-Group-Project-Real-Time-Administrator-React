@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { BASE_URL } from '../../servers/config'
 
 const DepartmentForm = ({ departments, setDepartments }) => {
@@ -10,24 +9,29 @@ const DepartmentForm = ({ departments, setDepartments }) => {
     name: '',
     description: ''
   }
-  
+
   const [formValues, setFormValues] = useState(initialState)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.post(
-        `${BASE_URL}/departments`, 
-        formValues, 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
-      setDepartments([...departments, response.data]) 
-      setFormValues(initialState)
+      const response = await fetch(`${BASE_URL}/department`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(formValues) 
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to create department')
+      }
+
+      const data = await response.json()
+      setDepartments([...departments, data]) 
+      setFormValues(initialState) 
       navigate('/departmentlist') 
     } catch (error) {
       console.error('Error adding department:', error)

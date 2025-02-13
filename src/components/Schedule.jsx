@@ -1,105 +1,196 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { motion } from 'framer-motion'
-
+import { useState } from 'react'
+import FullCalendar from '@fullcalendar/react'
+import resourceTimelinePlugin from '@fullcalendar/resource-timeline'
+import interactionPlugin from '@fullcalendar/interaction'
+import '../styles/components/Schedule.css'
 const ShiftSchedule = () => {
-  const dates = [
-    '5th of Feb',
-    '6th of Feb',
-    '7th of Feb',
-    '8th of Feb',
-    '9th of Feb',
-    '10th of Feb',
-    '11th of Feb',
-    '12th of Feb',
-    '13th of Feb',
-    '14th of Feb',
-    '15th of Feb',
-    '16th of Feb',
-    '17th of Feb'
-  ]
+  const [events, setEvents] = useState([
+    {
+      id: '1',
+      resourceId: 'a',
+      title: 'Day off',
+      start: '2025-02-12T00:00:00',
+      end: '2025-02-13T00:00:00'
+    },
+    {
+      id: '2',
+      resourceId: 'b',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '3',
+      resourceId: 'c',
+      title: 'Midday Shift',
+      start: '2025-02-12T16:00:00',
+      end: '2025-02-13T00:00:00'
+    },
+    {
+      id: '4',
+      resourceId: 'd',
+      title: 'Late Night Shift',
+      start: '2025-02-12T00:00:00',
+      end: '2025-02-12T08:00:00'
+    },
+    {
+      id: '5',
+      resourceId: 'e',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '6',
+      resourceId: 'f',
+      title: 'Midday Shift',
+      start: '2025-02-12T16:00:00',
+      end: '2025-02-13T00:00:00'
+    },
+    {
+      id: '7',
+      resourceId: 'g',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '8',
+      resourceId: 'h',
+      title: 'Midday Shift',
+      start: '2025-02-12T16:00:00',
+      end: '2025-02-13T00:00:00'
+    },
+    {
+      id: '9',
+      resourceId: 'i',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '10',
+      resourceId: 'j',
+      title: 'Triple Shift',
+      start: '2025-02-12T00:00:00',
+      end: '2025-02-13T00:00:00'
+    },
+    {
+      id: '11',
+      resourceId: 'k',
+      title: 'Midday Shift',
+      start: '2025-02-12T16:00:00',
+      end: '2025-02-13T00:00:00'
+    },
+    {
+      id: '12',
+      resourceId: 'l',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '13',
+      resourceId: 'm',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '14',
+      resourceId: 'n',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '15',
+      resourceId: 'o',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '16',
+      resourceId: 'p',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '17',
+      resourceId: 'q',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '18',
+      resourceId: 'r',
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
+    },
+    {
+      id: '19',
+      resourceId: 's',
+      title: 'Late Night Shift',
+      start: '2025-02-12T00:00:00',
+      end: '2025-02-12T08:00:00'
+    }
+  ])
 
-  const shifts = [
-    'Early Morning (8 AM - 4 PM)',
-    'Morning (10 AM - 6 PM)',
-    'Afternoon (12 PM - 8 PM)',
-    'Evening (2 PM - 10 PM)',
-    'Late Night (4 PM - 12 AM)'
+  const resources = [
+    { id: 'a', title: 'Mohsen' },
+    { id: 'b', title: 'Salma' },
+    { id: 'c', title: 'Maryam' },
+    { id: 'd', title: 'Mohammed' },
+    { id: 'e', title: 'Hassan' },
+    { id: 'f', title: 'Loay' },
+    { id: 'g', title: 'Maitham' },
+    { id: 'h', title: 'Muhannad' },
+    { id: 'i', title: 'Ahlam' },
+    { id: 'j', title: 'Redha' },
+    { id: 'k', title: 'Jassim' },
+    { id: 'l', title: 'Narjas' },
+    { id: 'm', title: 'Fatima' },
+    { id: 'n', title: 'May' },
+    { id: 'o', title: 'Nowra' },
+    { id: 'p', title: 'Salman' },
+    { id: 'q', title: 'Mahmood' },
+    { id: 'r', title: 'Nayef' },
+    { id: 's', title: 'Ali' }
   ]
 
   return (
-    <div className="container mt-4">
-      <h1 className="text-center mb-4">Schedule Management System</h1>
-      <div className="table-responsive rounded p-4">
-        <motion.div
-          style={{
-            overflowX: 'auto',
-            maxWidth: '100%',
-            position: 'relative'
-          }}
-          initial={{ x: '-100%' }}
-          animate={{ x: 0 }}
-          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-        >
-          <table
-            className="table table-bordered border-dark text-center"
-            style={{
-              tableLayout: 'fixed',
-              minWidth: '1000px'
-            }}
-          >
-            <thead className="table-light border-dark">
-              <tr>
-                <th
-                  className="border-dark"
-                  style={{
-                    position: 'sticky',
-                    left: 0,
-                    backgroundColor: 'white',
-                    zIndex: 1
-                  }}
-                >
-                  Call Center
-                </th>
-                {dates.map((date, index) => (
-                  <th key={index} className="border-dark">
-                    {date}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {shifts.map((shift, index) => (
-                <tr key={index}>
-                  <td
-                    className="fw-bold bg-light border-dark"
-                    style={{
-                      position: 'sticky',
-                      left: 0,
-                      backgroundColor: 'white',
-                      zIndex: 1
-                    }}
-                  >
-                    {shift}
-                  </td>
-                  {dates.map((_, idx) => (
-                    <td
-                      key={idx}
-                      className="border-dark"
-                      style={{
-                        whiteSpace: 'nowrap',
-                        textOverflow: 'ellipsis',
-                        overflow: 'hidden'
-                      }}
-                    >
-                      -
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </motion.div>
-      </div>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4 TextChange">Schedule Dashboard</h2>
+      <FullCalendar
+        plugins={[resourceTimelinePlugin, interactionPlugin]}
+        initialView="resourceTimelineDay"
+        headerToolbar={{
+          left: '',
+          center: '',
+          right: ''
+        }}
+        slotMinTime="00:00:00"
+        slotMaxTime="24:00:00"
+        slotDuration="01:00:00"
+        resources={resources}
+        events={events}
+        editable={true}
+        selectable={true}
+        height="auto"
+        aspectRatio={1.5}
+        validRange={{
+          start: '2025-02-12',
+          end: '2025-02-12'
+        }}
+        schedulerLicenseKey="CC-Attribution-NonCommercial-NoDerivatives"
+        resourceLabelDidMount={(info) => {
+          info.el.classList.add('TextChange')
+        }}
+      />
     </div>
   )
 }

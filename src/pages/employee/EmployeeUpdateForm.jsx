@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../servers/config';
@@ -121,4 +122,4 @@ const EmployeeUpdateForm = () => {
   );
 };
 
-export default EmployeeUpdateForm;
+export default EmployeeUpdateForm

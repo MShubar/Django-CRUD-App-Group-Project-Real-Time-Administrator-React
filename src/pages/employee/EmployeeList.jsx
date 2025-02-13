@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react'
 import Employee from '../../components/Employee'
 import { NavLink } from 'react-router-dom'
 import EmployeeForm from './EmployeeForm'
@@ -11,32 +11,39 @@ const EmployeeList = ({ employees, user, departments }) => {
   const [selectedEmployee, setSelectedEmployee] = useState(null); // State to hold the selected employee for details
 
   const handleAddEmployee = (newEmployee) => {
-    console.log("New Employee Added:", newEmployee);
+    console.log('New Employee Added:', newEmployee)
     // Logic to add the new employee
-  };
+  }
 
   const handleRowClick = (employee) => {
-    setSelectedEmployee(employee); // Set the selected employee
-  };
+    setSelectedEmployee(employee) // Set the selected employee
+  }
 
   const handleCloseDetails = () => {
-    setSelectedEmployee(null); // Close the details view
-  };
+    setSelectedEmployee(null) // Close the details view
+  }
 
   return (
     <div className="container my-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1 className="text-primary">Employees List</h1>
-        <button className="btn btn-success" onClick={() => setShowForm((prev) => !prev)}>
+        <button
+          className="btn btn-success"
+          onClick={() => setShowForm((prev) => !prev)}
+        >
           {showForm ? 'Cancel' : 'New Employee'}
         </button>
       </div>
       {showForm && <EmployeeForm onAdd={handleAddEmployee} user={user} departments={departments}/>}
-      
+ 
       <section className="employee-list">
         <div className="row gy-3">
           {employees.map((employee) => (
-            <div className="col-12" key={employee._id} onClick={() => handleRowClick(employee)}>
+            <div
+              className="col-12"
+              key={employee._id}
+              onClick={() => handleRowClick(employee)}
+            >
               <Employee employee={employee} />
             </div>
           ))}
@@ -44,13 +51,13 @@ const EmployeeList = ({ employees, user, departments }) => {
       </section>
 
       {selectedEmployee && (
-        <EmployeeDetails 
-          employee={selectedEmployee} 
+        <EmployeeDetails
+          employee={selectedEmployee}
           onClose={handleCloseDetails} // Pass in the close handler
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default EmployeeList;
+export default EmployeeList
