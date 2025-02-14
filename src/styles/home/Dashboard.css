@@ -1,0 +1,83 @@
+/* Basic Dashboard Container */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 2rem;
+}
+
+.toggle-form-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.toggle-form-btn:hover {
+  background-color: #218838;
+}
+
+/* Form Container */
+.form-container {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h5 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
+}
+
+.TextChange {
+  color: white;
+}
+
+.fc-toolbar .fc-center h2 .fc-toolbar-title {
+  color: white !important;
+}
