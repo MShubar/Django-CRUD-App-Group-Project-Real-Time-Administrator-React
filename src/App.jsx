@@ -6,6 +6,9 @@ import Signin from './pages/auth/Signin'
 import Signup from './pages/auth/Signup'
 import Dashboard from './pages/home/Dashboard'
 import DepartmentForm from './pages/department/DepartmentForm'
+import DepartmentDetails from './pages/department/DepartmentDetails'
+import DepartmentList from './pages/department/DepartmentList'
+import DepartmentUpdateForm from './pages/department/DepartmentUpdateForm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
@@ -18,24 +21,29 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [departments, setDepartments] = useState([])
 
-  const getDepartments = async () => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      try {
-        const response = await fetch('/api/departments', {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        const data = await response.json()
-        setDepartments(data) 
-      } catch (error) {
-        console.error('Error fetching departments:', error)
-      }
-    }
-  }
+  const fetchDepartments = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch(`${BASE_URL}/department`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
 
+      if (!response.ok) {
+        throw new Error('Failed to fetch departments');
+      }
+
+      const departmentData = await response.json();
+      setDepartments(departmentData);
+    } catch (error) {
+      console.error('Error fetching departments:', error);
+    }
+  };
   useEffect(() => {
     if (isAuthenticated) {
-      getDepartments()
+      fetchDepartments();
     }
   }, [isAuthenticated])
 
@@ -93,10 +101,14 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}
         {user ? (
-          <>
-          <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />}/>
-          </>
-        ) : null }
+        <>
+        <Route path="/departmentlist" element={<DepartmentList />} />
+        <Route path="/departments/:id" element={<DepartmentDetails />} />
+        <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
+        <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
+        </>
+
+        ) : null}
 
         {user ? <Route path="/employees" element={<EmployeeList employees={employees} user={user} departments={departments}/>} /> : null}
         {user ? <Route path="/employees/:id" element={<EmployeeDetails employees={employees} user={user}/>} /> : null}

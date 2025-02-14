@@ -35,11 +35,6 @@ export default [
       ],
       'react/prop-types': 'off',
       'react/no-unescaped-entities': 'off'
-<<<<<<< HEAD
-    },
-  },
-=======
     }
   }
->>>>>>> a33bbfaae654dcdc13666e028fd1998e2d58899e
 ]

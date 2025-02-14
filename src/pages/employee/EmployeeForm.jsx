@@ -2,6 +2,8 @@
 import { useState } from 'react'
 
 const EmployeeForm = ({ onAdd , user, departments}) => {
+  //console.log("departments=============>>",departments);
+  
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [companyId, setCompanyId] = useState('');
