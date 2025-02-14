@@ -14,11 +14,12 @@ const EmployeeForm = ({ onAdd , user, departments}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const newEmployee = { name, position, companyId, departmentId, status }
+    const newEmployee = { name, position, companyId:user._id, departmentId, status ,email,password}
+    console.log('Submitting new employee:', newEmployee);
     onAdd(newEmployee)
     setName('');
     setPosition('');
-    setCompanyId(user._id);
+    setCompanyId("");
     setDepartmentId('');
     setStatus('');
   };
@@ -42,20 +43,19 @@ const EmployeeForm = ({ onAdd , user, departments}) => {
         required
       />
       <select
-              id="departmentId"
-              name="departmentId"
-              className="form-control border border-success rounded-3 shadow-sm"
-              onChange={(e) => setDepartmentId(e.target.value)}
-              
-              required
-            >
-              <option value="">Select Department</option>
-              {departments.map((department) => (
-                <option key={department._id} value={department._id}>
-                  {department.name} {/* Adjust the display value as needed */}
-                </option>
-              ))}
-      </select>
+          id="departmentId"
+          name="departmentId"
+          className="form-control border border-success rounded-3 shadow-sm"
+          onChange={(e) => setDepartmentId(e.target.value)}
+          required
+        >
+          <option value="">Select Department</option>
+          {departments.map((department) => (
+            <option key={department._id} value={department._id}>
+              {department.name}
+            </option>
+          ))}
+        </select>
       <select
               id="status"
               name="status"
@@ -65,9 +65,9 @@ const EmployeeForm = ({ onAdd , user, departments}) => {
               required
             >
               <option value="">Select a Status</option>
-              <option value="Credit">Active</option>
-              <option value="Debit">Inactive</option>
-              <option value="Debit">Blocked</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Blocked">Blocked</option>
       </select>
       <input
         type="text"
@@ -77,7 +77,7 @@ const EmployeeForm = ({ onAdd , user, departments}) => {
         required
       />
       <input
-        type="text"
+        type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
