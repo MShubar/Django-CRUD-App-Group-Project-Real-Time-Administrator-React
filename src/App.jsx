@@ -95,11 +95,21 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}
         {user ? (
+<<<<<<< HEAD
           <>
           <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />}/>
           </>
         ) : null }
 
+=======
+        <>
+        <Route path="/departmentlist" element={<DepartmentList />} />
+        <Route path="/departments/:id" element={<DepartmentDetails />} />
+        <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
+        <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
+        </>
+        ) : null}
+>>>>>>> a33bbfaae654dcdc13666e028fd1998e2d58899e
         {user ? <Route path="/employees" element={<EmployeeList employees={employees} user={user} departments={departments}/>} /> : null}
         {user ? <Route path="/employees/:id" element={<EmployeeDetails employees={employees} user={user}/>} /> : null}
         {user ? <Route path="/employees/update/:id" element={<EmployeeUpdateForm employees={employees} user={user} />} /> : null}

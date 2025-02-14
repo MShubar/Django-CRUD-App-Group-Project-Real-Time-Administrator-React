@@ -7,12 +7,19 @@ const EmployeeForm = ({ onAdd , user, departments}) => {
   const [companyId, setCompanyId] = useState('');
   const [departmentId, setDepartmentId] = useState('');
   const [status, setStatus] = useState('');
+<<<<<<< HEAD
+=======
+
+>>>>>>> a33bbfaae654dcdc13666e028fd1998e2d58899e
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const newEmployee = { name, position, companyId, departmentId, status }
     onAdd(newEmployee)
+<<<<<<< HEAD
     // Clear the form
+=======
+>>>>>>> a33bbfaae654dcdc13666e028fd1998e2d58899e
     setName('');
     setPosition('');
     setCompanyId(user._id);

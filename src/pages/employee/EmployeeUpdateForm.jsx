@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> a33bbfaae654dcdc13666e028fd1998e2d58899e
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../servers/config';
