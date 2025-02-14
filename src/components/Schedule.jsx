@@ -29,9 +29,9 @@ const ShiftSchedule = () => {
     {
       id: '4',
       resourceId: 'd',
-      title: 'Late Night Shift',
+      title: 'Day off',
       start: '2025-02-12T00:00:00',
-      end: '2025-02-12T08:00:00'
+      end: '2025-02-13T00:00:00'
     },
     {
       id: '5',
