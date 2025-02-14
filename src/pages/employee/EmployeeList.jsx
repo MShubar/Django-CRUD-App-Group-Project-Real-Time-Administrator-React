@@ -35,11 +35,7 @@ const EmployeeList = ({ employees, user, departments }) => {
         </button>
       </div>
       {showForm && <EmployeeForm onAdd={handleAddEmployee} user={user} departments={departments}/>}
-<<<<<<< HEAD
-      
-=======
  
->>>>>>> a33bbfaae654dcdc13666e028fd1998e2d58899e
       <section className="employee-list">
         <div className="row gy-3">
           {employees.map((employee) => (
