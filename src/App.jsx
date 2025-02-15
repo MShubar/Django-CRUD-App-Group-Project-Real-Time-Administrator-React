@@ -104,7 +104,7 @@ function App() {
         {user ? (
         <>
         <Route path="/departmentlist" element={<DepartmentList />} />
-        <Route path="/departments/:id" element={<DepartmentDetails />} />
+        <Route path="/departments/:id" element={<DepartmentDetails departments={departments}/>} />
         <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
         <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
         <Route path="/deletedepartment/:id" element={<DepartmentDeleteConfirm departments={departments} setDepartments={setDepartments} />} />
@@ -112,8 +112,8 @@ function App() {
         ) : null}
 
         {user ? <Route path="/employees" element={<EmployeeList employees={employees} user={user} departments={departments}/>} setEmployees={setEmployees}/> : null}
-        {user ? <Route path="/employees/:id" element={<EmployeeDetails employees={employees} user={user}/>} /> : null}
-        {user ? <Route path="/employees/update/:id" element={<EmployeeUpdateForm departments={departments} setEmployees={setEmployees}/>} /> : null}
+        {user ? <Route path="/employees/:id" element={<EmployeeDetails employees={employees} user={user} departments={departments} />} /> : null}
+        {user ? <Route path="/employees/update/:id" element={<EmployeeUpdateForm user={user} departments={departments} setEmployees={setEmployees}/>} /> : null}
         {user ? (<>
             <Route
               path="/newdepartment"
