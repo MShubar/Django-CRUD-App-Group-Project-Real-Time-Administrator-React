@@ -14,9 +14,9 @@ const DepartmentDetails = () => {
         const response = await fetch(`${BASE_URL}/department/${id}`, {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'application/json'
-          },
+          }
         })
 
         if (!response.ok) {
@@ -33,6 +33,27 @@ const DepartmentDetails = () => {
     fetchDepartment()
   }, [id])
 
+  const handleDelete = async () => {
+    const token = localStorage.getItem('token')
+    try {
+      const response = await fetch(`${BASE_URL}/department/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to delete department')
+      }
+
+      navigate('/departments')
+    } catch (error) {
+      console.error('Error deleting department:', error)
+    }
+  }
+
   return (
     <div>
       {department ? (
@@ -40,7 +61,9 @@ const DepartmentDetails = () => {
           <h1>Department Details</h1>
           <section className="department-details">
             <h2>{department.name}</h2>
-            <p><strong>Description:</strong> {department.description}</p>
+            <p>
+              <strong>Description:</strong> {department.description}
+            </p>
 
             <Link
               className="btn btn-primary btn-sm mb-2"
@@ -48,16 +71,17 @@ const DepartmentDetails = () => {
             >
               Update
             </Link>
+
             <Link
               className="btn btn-danger btn-sm mb-2"
               to={`/deletedepartment/${department._id}`}
             >
               Delete
             </Link>
-            
+
             <button
               className="btn btn-secondary btn-sm mb-2"
-              onClick={() => navigate(-1)} 
+              onClick={() => navigate(-1)}
             >
               Back
             </button>
