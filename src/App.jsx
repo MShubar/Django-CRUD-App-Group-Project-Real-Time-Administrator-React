@@ -113,7 +113,7 @@ function App() {
         {user ? <Route path="/employees" element={<EmployeeList employees={employees} user={user} departments={departments}/>} setEmployees={setEmployees}/> : null}
         {user ? <Route path="/employees/:id" element={<EmployeeDetails employees={employees} user={user}/>} /> : null}
         {user ? <Route path="/employees/update/:id" element={<EmployeeUpdateForm departments={departments} setEmployees={setEmployees}/>} /> : null}
-        {user ? (
+        {user ? (<>
             <Route
               path="/newdepartment"
               element={
