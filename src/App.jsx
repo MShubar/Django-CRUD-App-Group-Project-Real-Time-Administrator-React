@@ -9,6 +9,7 @@ import DepartmentForm from './pages/department/DepartmentForm'
 import DepartmentDetails from './pages/department/DepartmentDetails'
 import DepartmentList from './pages/department/DepartmentList'
 import DepartmentUpdateForm from './pages/department/DepartmentUpdateForm'
+import DepartmentDeleteConfirm from './pages/department/DepartmentDeleteConfirm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
@@ -106,8 +107,8 @@ function App() {
         <Route path="/departments/:id" element={<DepartmentDetails />} />
         <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
         <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
+        <Route path="/deletedepartment/:id" element={<DepartmentDeleteConfirm departments={departments} setDepartments={setDepartments} />} />
         </>
-
         ) : null}
 
         {user ? <Route path="/employees" element={<EmployeeList employees={employees} user={user} departments={departments}/>} setEmployees={setEmployees}/> : null}
