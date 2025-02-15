@@ -11,30 +11,27 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
   const [showForm, setShowForm] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  const handleAddEmployee = async (newEmployee) => {
-    const token = localStorage.getItem('token'); // Retrieve the token
-    try {
-      const response = await fetch(`${BASE_URL}/employees/new`, {
-        method: 'POST', // Use POST to add a new employee
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Include the token in the header
-        },
-        body: JSON.stringify(newEmployee), // Convert the new employee data to JSON
-      });
-      //console.log('Response body=============:', response);
+  // const handleAddEmployee = async (newEmployee) => {
+  //   const token = localStorage.getItem('token'); // Retrieve the token
+  //   try {
+      
+  //     const response = await fetch(`${BASE_URL}/employees/new`, {
+  //       method: 'POST', // Use POST to add a new employee
+  //       body: newEmployee, // Convert the new employee data to JSON
+  //     });
+  //     //console.log('Response body=============:', response);
+  //     const data = await response.json()
+  //     if (!response.ok) {
+  //       throw new Error(`Failed to add employee: ${data.error} `);
+  //     }
 
-      if (!response.ok) {
-        throw new Error('Failed to add employee');
-      }
-
-      const addedEmployee = await response.json(); // Parse the response to get the added employee
-      setEmployees((prevEmployees) => [...prevEmployees, addedEmployee]); // Update the state with the new employee
-      console.log('New Employee Added:', addedEmployee);
-    } catch (error) {
-      console.error('Error adding employee:', error);
-    }
-  };
+  //     const addedEmployee = await response.json(); // Parse the response to get the added employee
+  //     setEmployees((prevEmployees) => [...prevEmployees, addedEmployee]); // Update the state with the new employee
+  //     console.log('New Employee Added:', addedEmployee);
+  //   } catch (error) {
+  //     console.error('Error adding employee:', error);
+  //   }
+  // };
 
   const handleRowClick = (employee) => {
     setSelectedEmployee(employee);
@@ -55,7 +52,7 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
           {showForm ? 'Cancel' : 'New Employee'}
         </button>
       </div>
-      {showForm && <EmployeeForm onAdd={handleAddEmployee} user={user} departments={departments} />}
+      {showForm && <EmployeeForm user={user} departments={departments} setEmployees={setEmployees}/>}
  
       <section className="employee-list">
         <div className="row gy-3">
