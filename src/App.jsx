@@ -16,6 +16,7 @@ import DeleteEmployee from './pages/employee/DeleteEmployee'
 import { useState, useEffect } from 'react'
 import { BASE_URL } from './servers/config'
 import 'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
+import Background from './components/Background'
 
 function App() {
   const [user, setUser] = useState()
@@ -88,6 +89,7 @@ function App() {
   return (
     <>
       <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+      <Background />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

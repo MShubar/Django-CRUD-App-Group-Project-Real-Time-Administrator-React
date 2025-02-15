@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import '../styles/components/Dark-Light-Button.css'
+import Background from './Background'
 function LightDark() {
   const [isDarkMode, setIsDarkMode] = useState(false)
 
@@ -28,6 +29,7 @@ function LightDark() {
 
   return (
     <div>
+      <Background isDarkMode={isDarkMode} />
       <button
         className={
           isDarkMode ? 'Dark-Light-Mode-Button' : 'Light-Dark-Mode-Button'

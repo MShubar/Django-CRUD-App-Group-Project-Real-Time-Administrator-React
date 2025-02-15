@@ -3,6 +3,7 @@ import FullCalendar from '@fullcalendar/react'
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline'
 import interactionPlugin from '@fullcalendar/interaction'
 import '../styles/components/Schedule.css'
+import { motion } from 'framer-motion'
 const ShiftSchedule = () => {
   const [events, setEvents] = useState([
     {
@@ -15,16 +16,16 @@ const ShiftSchedule = () => {
     {
       id: '2',
       resourceId: 'b',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
+      title: 'Midday Shift',
+      start: '2025-02-12T16:00:00',
+      end: '2025-02-13T00:00:00'
     },
     {
       id: '3',
       resourceId: 'c',
-      title: 'Midday Shift',
-      start: '2025-02-12T16:00:00',
-      end: '2025-02-13T00:00:00'
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
     },
     {
       id: '4',
@@ -36,16 +37,16 @@ const ShiftSchedule = () => {
     {
       id: '5',
       resourceId: 'e',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
+      title: 'Midday Shift',
+      start: '2025-02-12T16:00:00',
+      end: '2025-02-13T00:00:00'
     },
     {
       id: '6',
       resourceId: 'f',
-      title: 'Midday Shift',
-      start: '2025-02-12T16:00:00',
-      end: '2025-02-13T00:00:00'
+      title: 'Early Morning Shift',
+      start: '2025-02-12T08:00:00',
+      end: '2025-02-12T16:00:00'
     },
     {
       id: '7',
@@ -57,141 +58,85 @@ const ShiftSchedule = () => {
     {
       id: '8',
       resourceId: 'h',
-      title: 'Midday Shift',
-      start: '2025-02-12T16:00:00',
+      title: 'Double Shift',
+      start: '2025-02-12T08:00:00',
       end: '2025-02-13T00:00:00'
     },
     {
       id: '9',
       resourceId: 'i',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
-    },
-    {
-      id: '10',
-      resourceId: 'j',
-      title: 'Triple Shift',
-      start: '2025-02-12T00:00:00',
-      end: '2025-02-13T00:00:00'
-    },
-    {
-      id: '11',
-      resourceId: 'k',
-      title: 'Midday Shift',
-      start: '2025-02-12T16:00:00',
-      end: '2025-02-13T00:00:00'
-    },
-    {
-      id: '12',
-      resourceId: 'l',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
-    },
-    {
-      id: '13',
-      resourceId: 'm',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
-    },
-    {
-      id: '14',
-      resourceId: 'n',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
-    },
-    {
-      id: '15',
-      resourceId: 'o',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
-    },
-    {
-      id: '16',
-      resourceId: 'p',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
-    },
-    {
-      id: '17',
-      resourceId: 'q',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
-    },
-    {
-      id: '18',
-      resourceId: 'r',
-      title: 'Early Morning Shift',
-      start: '2025-02-12T08:00:00',
-      end: '2025-02-12T16:00:00'
-    },
-    {
-      id: '19',
-      resourceId: 's',
-      title: 'Late Night Shift',
+      title: 'Late night Shift',
       start: '2025-02-12T00:00:00',
       end: '2025-02-12T08:00:00'
     }
   ])
 
   const resources = [
-    { id: 'a', title: 'Mohsen' },
-    { id: 'b', title: 'Salma' },
+    { id: 'a', title: 'Salma' },
+    { id: 'b', title: 'Loay' },
     { id: 'c', title: 'Maryam' },
     { id: 'd', title: 'Mohammed' },
     { id: 'e', title: 'Hassan' },
-    { id: 'f', title: 'Loay' },
-    { id: 'g', title: 'Maitham' },
-    { id: 'h', title: 'Muhannad' },
-    { id: 'i', title: 'Ahlam' },
-    { id: 'j', title: 'Redha' },
-    { id: 'k', title: 'Jassim' },
-    { id: 'l', title: 'Narjas' },
-    { id: 'm', title: 'Fatima' },
-    { id: 'n', title: 'May' },
-    { id: 'o', title: 'Nowra' },
-    { id: 'p', title: 'Salman' },
-    { id: 'q', title: 'Mahmood' },
-    { id: 'r', title: 'Nayef' },
-    { id: 's', title: 'Ali' }
+    { id: 'f', title: 'Maitham' },
+    { id: 'g', title: 'Salman' },
+    { id: 'h', title: 'Redha' },
+    { id: 'i', title: 'Ali' }
   ]
 
+  // Sort the resources alphabetically
+  resources.sort((a, b) => a.title.localeCompare(b.title))
+
+  // Match the events with the sorted resources
+  const matchedEvents = events.map((event) => {
+    const matchedResource = resources.find(
+      (resource) => resource.id === event.resourceId
+    )
+    return { ...event, resource: matchedResource }
+  })
+
+  console.log(matchedEvents)
+
   return (
-    <div className="p-4">
+    <motion.div
+      className="p-4"
+      initial={{ opacity: 0 }} // Initial state for animation
+      animate={{ opacity: 1 }} // Animate to full opacity
+      transition={{ duration: 0.5 }} // Duration of the animation
+    >
       <h2 className="text-xl font-bold mb-4 TextChange">Schedule Dashboard</h2>
-      <FullCalendar
-        plugins={[resourceTimelinePlugin, interactionPlugin]}
-        initialView="resourceTimelineDay"
-        headerToolbar={{
-          left: '',
-          center: '',
-          right: ''
-        }}
-        slotMinTime="00:00:00"
-        slotMaxTime="24:00:00"
-        slotDuration="01:00:00"
-        resources={resources}
-        events={events}
-        editable={true}
-        selectable={true}
-        height="auto"
-        aspectRatio={1.5}
-        validRange={{
-          start: '2025-02-12',
-          end: '2025-02-12'
-        }}
-        schedulerLicenseKey="CC-Attribution-NonCommercial-NoDerivatives"
-        resourceLabelDidMount={(info) => {
-          info.el.classList.add('TextChange')
-        }}
-      />
-    </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 1 }}
+      >
+        <FullCalendar
+          plugins={[resourceTimelinePlugin, interactionPlugin]}
+          initialView="resourceTimelineDay"
+          headerToolbar={{
+            left: '',
+            center: '',
+            right: ''
+          }}
+          slotMinTime="00:00:00"
+          slotMaxTime="24:00:00"
+          slotDuration="01:00:00"
+          resources={resources}
+          events={events}
+          editable={true}
+          selectable={true}
+          height="auto"
+          aspectRatio={1.5}
+          validRange={{
+            start: '2025-02-12',
+            end: '2025-02-12'
+          }}
+          schedulerLicenseKey="CC-Attribution-NonCommercial-NoDerivatives"
+          resourceLabelDidMount={(info) => {
+            info.el.classList.add('TextChange')
+          }}
+        />
+      </motion.div>
+    </motion.div>
   )
 }
 
