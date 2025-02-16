@@ -1,12 +1,12 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { BASE_URL } from '../../servers/config';
-import { Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { BASE_URL } from '../../servers/config'
+import { Link } from 'react-router-dom'
 
 const DepartmentDetails = () => {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const [department, setDepartment] = useState(null);
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const [department, setDepartment] = useState(null)
 
   useEffect(() => {
     const fetchDepartment = async () => {
@@ -14,54 +14,56 @@ const DepartmentDetails = () => {
         const response = await fetch(`${BASE_URL}/department/${id}`, {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-          },
-        });
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        })
 
         if (!response.ok) {
-          throw new Error('Failed to fetch department details');
+          throw new Error('Failed to fetch department details')
         }
 
-        const data = await response.json();
-        setDepartment(data);
+        const data = await response.json()
+        setDepartment(data)
       } catch (error) {
-        console.error('Error fetching department details:', error);
+        console.error('Error fetching department details:', error)
       }
-    };
+    }
 
-    fetchDepartment();
-  }, [id]);
+    fetchDepartment()
+  }, [id])
 
   const handleDelete = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token')
     try {
       const response = await fetch(`${BASE_URL}/department/${id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
 
       if (!response.ok) {
-        throw new Error('Failed to delete department');
+        throw new Error('Failed to delete department')
       }
 
-      navigate('/departments');
+      navigate('/departments')
     } catch (error) {
-      console.error('Error deleting department:', error);
+      console.error('Error deleting department:', error)
     }
-  };
+  }
 
-return (
+  return (
     <div>
       {department ? (
         <>
           <h1>Department Details</h1>
           <section className="department-details">
             <h2>{department.name}</h2>
-            <p><strong>Description:</strong> {department.description}</p>
+            <p>
+              <strong>Description:</strong> {department.description}
+            </p>
 
             <Link
               className="btn btn-primary btn-sm mb-2"
@@ -72,7 +74,7 @@ return (
 
             <Link
               className="btn btn-danger btn-sm mb-2"
-              to={`/deletedepartment/${department._id}`} 
+              to={`/deletedepartment/${department._id}`}
             >
               Delete
             </Link>
@@ -89,7 +91,7 @@ return (
         <h1>Loading...</h1>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default DepartmentDetails;
+export default DepartmentDetails

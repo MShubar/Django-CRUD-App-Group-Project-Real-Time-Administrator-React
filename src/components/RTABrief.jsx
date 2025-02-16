@@ -19,16 +19,6 @@ function RTABrief() {
 
   return (
     <section className="rta-brief">
-      <motion.div
-        className="title text-white"
-        variants={titleVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
-      >
-        Real Time Administrator
-      </motion.div>
-
       <section className="borders">
         <motion.div
           className="border-text"

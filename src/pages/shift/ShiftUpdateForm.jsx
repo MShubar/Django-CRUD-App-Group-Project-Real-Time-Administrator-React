@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { BASE_URL } from '../../servers/config';
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { BASE_URL } from '../../servers/config'
 
 const ShiftUpdateForm = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [shift, setShift] = useState(null);
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [shift, setShift] = useState(null)
 
   useEffect(() => {
     const fetchShift = async () => {
@@ -13,53 +13,54 @@ const ShiftUpdateForm = () => {
         const response = await fetch(`${BASE_URL}/shift/${id}`, {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-          },
-        });
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        })
 
         if (!response.ok) {
-          throw new Error('Failed to fetch shift details');
+          throw new Error('Failed to fetch shift details')
         }
 
-        const data = await response.json();
-        setShift(data);
+        const data = await response.json()
+        setShift(data)
       } catch (error) {
-        console.error('Error fetching shift details:', error);
+        console.error('Error fetching shift details:', error)
       }
-    };
+    }
 
-    fetchShift();
-  }, [id]);
+    fetchShift()
+  }, [id])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const response = await fetch(`${BASE_URL}/shift/${id}`, {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           name: shift.name,
           startTime: shift.startTime,
-          endTime: shift.endTime,
-        }),
-      });
+          endTime: shift.endTime
+        })
+      })
 
       if (!response.ok) {
-        throw new Error('Failed to update shift');
+        throw new Error('Failed to update shift')
       }
 
       const updatedShift = await response.json();
       navigate(`/shift/${updatedShift._id}`);
-    } catch (error) {
-      console.error('Error updating shift:', error);
-    }
-  };
 
-  if (!shift) return <h2>Loading...</h2>;
+    } catch (error) {
+      console.error('Error updating shift:', error)
+    }
+  }
+
+  if (!shift) return <h2>Loading...</h2>
 
   return (
     <div>
@@ -92,10 +93,12 @@ const ShiftUpdateForm = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Update Shift</button>
+        <button type="submit" className="btn btn-primary">
+          Update Shift
+        </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ShiftUpdateForm;
+export default ShiftUpdateForm
