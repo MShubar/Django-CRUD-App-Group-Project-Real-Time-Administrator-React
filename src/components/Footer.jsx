@@ -27,7 +27,7 @@ function Footer({ isAuthenticated }) {
         </div>
         <div className="column">
           <h2>Social Links</h2>
-          <a href="mailto:mohsen.salman099@gmail.com" className="column-text">
+          <a href="mailto:mohsen@ict-bh.tech" className="column-text">
             Email
           </a>
         </div>
