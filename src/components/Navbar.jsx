@@ -2,46 +2,46 @@ import { NavLink } from 'react-router-dom'
 import '../styles/components/Navbar.css'
 import LightDark from './Dark-Light-Button'
 import Logo from '../styles/Logo.svg'
-function Navbar({ isAuthenticated, onLogout }) {
+
+function Navbar({ isAuthenticated, role, onLogout }) {
   const handleClick = () => {
     onLogout()
   }
+
   return (
     <>
       <section className="navbar">
         <div className="nav-links">
-          {!isAuthenticated && (
-            <NavLink to="/" className="logo">
-              <img src={Logo} alt="logo" />
-            </NavLink>
-          )}
-          {isAuthenticated && (
-            <NavLink to="/dashboard" className="logo">
-              <img src={Logo} alt="logo" />
-            </NavLink>
-          )}
+          <NavLink to={isAuthenticated ? '/dashboard' : '/'} className="logo">
+            <img src={Logo} alt="logo" />
+          </NavLink>
+
           {!isAuthenticated && <NavLink to="/">Home</NavLink>}
           {isAuthenticated && <NavLink to="/dashboard">Dashboard</NavLink>}
-          {isAuthenticated && (
+
+          {/* Company can see everything */}
+          {role === 'company' && (
             <NavLink to="/departmentlist">Department</NavLink>
           )}
-          {isAuthenticated && <NavLink to="/shift">Shift</NavLink>}
-          {isAuthenticated && <NavLink to="/employees">Employee</NavLink>}
+          {role === 'company' && <NavLink to="/shift">Shift</NavLink>}
+          {(role === 'company' || role === 'employee') && (
+            <NavLink to="/employees">Employee</NavLink>
+          )}
         </div>
+
         <div className="reg-btn">
           <LightDark />
-          {!isAuthenticated && (
-            <NavLink to="/signin" className="signin">
-              Sign In
-            </NavLink>
-          )}
-          {!isAuthenticated && (
-            <NavLink to="/signup" className="signup">
-              Sign Up
-            </NavLink>
-          )}
-          {isAuthenticated && (
-            <NavLink to="/" onClick={handleClick} className="signin">
+          {!isAuthenticated ? (
+            <>
+              <NavLink to="/signin" className="signin">
+                Sign In
+              </NavLink>
+              <NavLink to="/signup" className="signup">
+                Sign Up
+              </NavLink>
+            </>
+          ) : (
+            <NavLink to="/" onClick={handleClick} className="signup">
               Log out
             </NavLink>
           )}
@@ -52,16 +52,22 @@ function Navbar({ isAuthenticated, onLogout }) {
         <NavLink to="/" className="logo">
           RTA
         </NavLink>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/signin" className="signin">
-          Sign In
-        </NavLink>
-        <NavLink to="/signup" className="signup">
-          Sign Up
-        </NavLink>
-        <NavLink to="/" onClick={handleClick} className="signin">
-          Log out
-        </NavLink>
+
+        {!isAuthenticated ? (
+          <>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/signin" className="signin">
+              Sign In
+            </NavLink>
+            <NavLink to="/signup" className="signup">
+              Sign Up
+            </NavLink>
+          </>
+        ) : (
+          <NavLink to="/" onClick={handleClick} className="signup">
+            Log out
+          </NavLink>
+        )}
       </nav>
     </>
   )

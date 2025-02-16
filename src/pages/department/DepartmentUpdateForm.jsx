@@ -1,57 +1,57 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../../servers/config';
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../../servers/config'
 
 const DepartmentUpdateForm = ({ departments, setDepartments }) => {
-  const { id } = useParams(); 
-  const navigate = useNavigate();
+  const { id } = useParams()
+  const navigate = useNavigate()
 
-  const department = departments.find((dept) => dept._id === id);
+  const department = departments.find((dept) => dept._id === id)
   if (!department) {
-    return <p>No department found</p>;
+    return <p>No department found</p>
   }
 
   const [formValues, setFormValues] = useState({
     name: department.name,
-    description: department.description,
-  });
+    description: department.description
+  })
 
   const handleChange = (event) => {
     setFormValues({
       ...formValues,
-      [event.target.id]: event.target.value,
-    });
-  };
+      [event.target.id]: event.target.value
+    })
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const token = localStorage.getItem('token');
-    
+    event.preventDefault()
+    const token = localStorage.getItem('token')
+
     try {
       const response = await fetch(`${BASE_URL}/department/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(formValues), 
-      });
+        body: JSON.stringify(formValues)
+      })
 
       if (!response.ok) {
-        throw new Error('Failed to update department');
+        throw new Error('Failed to update department')
       }
 
-      const updatedDept = await response.json();
+      const updatedDept = await response.json()
 
       setDepartments(
         departments.map((dept) => (dept._id === id ? updatedDept : dept))
-      );
+      )
 
-      navigate(`/departments/${id}`);
+      navigate(`/departments/${id}`)
     } catch (error) {
-      console.error('Error updating department:', error);
+      console.error('Error updating department:', error)
     }
-  };
+  }
 
   return (
     <div>
@@ -78,7 +78,7 @@ const DepartmentUpdateForm = ({ departments, setDepartments }) => {
         <button type="submit">Submit Update</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default DepartmentUpdateForm;
+export default DepartmentUpdateForm

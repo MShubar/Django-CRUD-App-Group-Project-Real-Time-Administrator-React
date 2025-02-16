@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const Employee = ({ employee, departments }) => {
   // Find the department object based on departmentId
-  const department = departments.find(dept => dept._id === employee.departmentId[0]);
-  const departmentName = department ? department.name : 'Unknown Department';
+  const department = departments.find(
+    (dept) => dept._id === employee.departmentId[0]
+  )
+  const departmentName = department ? department.name : 'Unknown Department'
 
   return (
     <Link to={`/employees/${employee._id}`} className="text-decoration-none">
@@ -29,7 +31,7 @@ const Employee = ({ employee, departments }) => {
         </div>
       </div>
     </Link>
-  );
+  )
 }
 
-export default Employee;
+export default Employee

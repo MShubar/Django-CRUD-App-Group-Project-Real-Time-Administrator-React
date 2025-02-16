@@ -1,20 +1,20 @@
-import { useState } from 'react';
-import Employee from '../../components/Employee';
-import { NavLink } from 'react-router-dom';
-import EmployeeForm from './EmployeeForm';
-import EmployeeDetails from './EmployeeDetails';
-import { BASE_URL } from '../../servers/config';
+import { useState } from 'react'
+import Employee from '../../components/Employee'
+import { NavLink } from 'react-router-dom'
+import EmployeeForm from './EmployeeForm'
+import EmployeeDetails from './EmployeeDetails'
+import { BASE_URL } from '../../servers/config'
 
 const EmployeeList = ({ employees, user, departments, setEmployees }) => {
   //console.log("departments==============",departments);
-  
-  const [showForm, setShowForm] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const [showForm, setShowForm] = useState(false)
+  const [selectedEmployee, setSelectedEmployee] = useState(null)
 
   // const handleAddEmployee = async (newEmployee) => {
   //   const token = localStorage.getItem('token'); // Retrieve the token
   //   try {
-      
+
   //     const response = await fetch(`${BASE_URL}/employees/new`, {
   //       method: 'POST', // Use POST to add a new employee
   //       body: newEmployee, // Convert the new employee data to JSON
@@ -34,12 +34,12 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
   // };
 
   const handleRowClick = (employee) => {
-    setSelectedEmployee(employee);
-  };
+    setSelectedEmployee(employee)
+  }
 
   const handleCloseDetails = () => {
-    setSelectedEmployee(null);
-  };
+    setSelectedEmployee(null)
+  }
 
   return (
     <div className="container my-4">
@@ -52,13 +52,23 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
           {showForm ? 'Cancel' : 'New Employee'}
         </button>
       </div>
-      {showForm && <EmployeeForm user={user} departments={departments} setEmployees={setEmployees}/>}
- 
+      {showForm && (
+        <EmployeeForm
+          user={user}
+          departments={departments}
+          setEmployees={setEmployees}
+        />
+      )}
+
       <section className="employee-list">
         <div className="row gy-3">
           {employees.map((employee) => (
-            <div className="col-12" key={employee._id} onClick={() => handleRowClick(employee)}>
-              <Employee employee={employee} departments={departments}/>
+            <div
+              className="col-12"
+              key={employee._id}
+              onClick={() => handleRowClick(employee)}
+            >
+              <Employee employee={employee} departments={departments} />
             </div>
           ))}
         </div>
@@ -71,7 +81,7 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default EmployeeList;
+export default EmployeeList

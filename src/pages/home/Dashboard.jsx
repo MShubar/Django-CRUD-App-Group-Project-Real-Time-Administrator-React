@@ -196,7 +196,7 @@ const Dashboard = () => {
           }
         }}
         headerToolbar={{
-          left: 'prev,next',
+          left: 'prev,next today',
           center: '',
           right: 'resourceTimelineMonth,resourceTimelineYear'
         }}
