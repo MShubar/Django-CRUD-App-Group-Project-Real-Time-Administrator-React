@@ -53,7 +53,7 @@ const ShiftUpdateForm = () => {
       }
 
       const updatedShift = await response.json();
-      navigate(`/shiftdetails/${updatedShift._id}`);
+      navigate(`/shift/${updatedShift._id}`);
     } catch (error) {
       console.error('Error updating shift:', error);
     }
