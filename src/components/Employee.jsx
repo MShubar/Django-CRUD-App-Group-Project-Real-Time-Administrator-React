@@ -16,7 +16,7 @@ const Employee = ({ employee, departments }) => {
               {employee.name}
             </h5>
             <h5 className="card-title text-primary fw-bold mb-0">
-              {employee.image}
+             <img src={`${employee.image}`} width="80" hight="60"/>
             </h5>
             <h5 className="card-title text-primary fw-bold mb-0">
               {employee.position}

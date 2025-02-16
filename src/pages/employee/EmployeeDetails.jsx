@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { BASE_URL } from '../../servers/config'
 import { Link } from 'react-router-dom'
 
-const EmployeeDetails = () => {
+const EmployeeDetails = ({departments}) => {
   const { id } = useParams() // Get the employee ID from the URL
   const [employee, setEmployee] = useState(null)
 
@@ -47,11 +47,9 @@ const EmployeeDetails = () => {
         <strong>Position:</strong> {employee.position}
       </p>
       <p>
-        <strong>Company ID:</strong> {employee.companyId}
-      </p>
-      <p>
-        <strong>Department ID:</strong> {employee.departmentId}
-      </p>
+  <strong>Department :</strong> 
+  {departments.find(department => department._id === employee.departmentId[0])?.name || 'Department Not Found'}
+</p>
       <p>
         <strong>Status:</strong> {employee.status}
       </p>

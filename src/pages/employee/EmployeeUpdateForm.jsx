@@ -1,125 +1,132 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { BASE_URL } from '../../servers/config'
-
-const EmployeeUpdateForm = ({ departments, setEmployees }) => {
-  const { id } = useParams()
-  const [employee, setEmployee] = useState(null)
-  const [name, setName] = useState('')
-  const [position, setPosition] = useState('')
-  const [departmentId, setDepartmentId] = useState('')
-  const [status, setStatus] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+import { useState, useEffect } from 'react';
+import { BASE_URL } from '../../servers/config';
+import { useParams, useNavigate } from 'react-router-dom';
+const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
+  const { id } = useParams();
+  const [formData, setFormData] = useState({
+    name: '',
+    position: '',
+    departmentId: '',
+    status: '',
+    image: null,
+    email: '',
+    password: ''
+  });
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const fetchEmployeeDetails = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/employees/${id}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        })
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch employee details')
-        }
-
-        const employeeData = await response.json()
-        setEmployee(employeeData)
-        setName(employeeData.name)
-        setPosition(employeeData.position)
-        setDepartmentId(employeeData.departmentId)
-        setStatus(employeeData.status)
-        setEmail(employeeData.email)
-        // Do not set password initially for security reasons
-      } catch (error) {
-        console.error('Error fetching employee details:', error)
-      }
-    }
-
-    fetchEmployeeDetails()
-  }, [id])
-
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    
+    // Check if formData is populated correctly
+    console.log('Current formData:', formData);
 
-    const updatedEmployee = {
-      name,
-      position,
-      departmentId,
-      status,
-      email
-    }
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('position', formData.position);
+    formDataToSend.append('image', formData.image);
+    formDataToSend.append('companyId', user._id);
+    formDataToSend.append('departmentId', formData.departmentId);
+    formDataToSend.append('status', formData.status);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('password', formData.password);
 
-    if (password) {
-      updatedEmployee.password = password
-    }
+    // Log FormData contents
+    //console.log('Submitting new employee:==========>>');
+    formDataToSend.forEach((value, key) => {
+      console.log(key, value);
+    });
 
     try {
       const response = await fetch(`${BASE_URL}/employees/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify(updatedEmployee)
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to update employee')
-      }
-
-      const updatedEmployeeData = await response.json() // Get the updated data from the response
-
-      // Update the employees state
-      setEmployees((prevEmployees) =>
-        prevEmployees.map((emp) =>
-          emp._id === updatedEmployeeData._id ? updatedEmployeeData : emp
-        )
-      )
-
-      navigate(`/employees/${id}`)
+        body: formDataToSend,
+    });
+        if (!response.ok) {
+          throw new Error('Failed to update employee');
+        }
+        const updatedEmployeeData = await response.json(); // Get the updated data from the response
+        // Update the employees state
+        setEmployees(prevEmployees => [...prevEmployees, updatedEmployeeData]);
+        console.log('Updated Employee :', updatedEmployeeData);
+        
+        navigate(`/employees/${id}`);
     } catch (error) {
-      console.error('Error updating employee:', error)
+      console.error('Error adding employee:', error);
     }
-  }
+  };
+  useEffect(() => {
+        const fetchEmployeeDetails = async () => {
+          try {
+            const response = await fetch(`${BASE_URL}/employees/${id}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+              },
+            });
+    
+            if (!response.ok) {
+              throw new Error('Failed to fetch employee details');
+            }
+    
+            const employeeData = await response.json();
+            setFormData(employeeData);
+            
+            // Do not set password initially for security reasons
+          } catch (error) {
+            console.error('Error fetching employee details:', error);
+          }
+        };
+    
+        fetchEmployeeDetails();
+      }, [id]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-  if (!employee) {
-    return <div>Loading...</div>
-  }
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData(prev => ({ ...prev, [name]: files[0] }));
+  };
 
   return (
     <div className="signup-container">
-      <h2>Edit Employee Details</h2>
       <form onSubmit={handleSubmit} className="signup-form">
+        <h2>Edit Employee</h2>
         <input
           type="text"
+          name="name"
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={formData.name} // Bind value
+          onChange={handleChange}
           required
         />
         <input
           type="text"
+          name="position"
           placeholder="Position"
-          value={position}
-          onChange={(e) => setPosition(e.target.value)}
+          value={formData.position} // Bind value
+          onChange={handleChange}
           required
+        />
+        <label>Profile Image:</label>
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={handleFileChange}
+          
         />
         <select
           id="departmentId"
           name="departmentId"
           className="form-control border border-success rounded-3 shadow-sm"
-          onChange={(e) => setDepartmentId(e.target.value)}
-          value={departmentId}
+          value={formData.departmentId} // Bind value
+          onChange={handleChange}
           required
         >
           <option value="">Select Department</option>
-          {departments.map((department) => (
+          {departments.map(department => (
             <option key={department._id} value={department._id}>
               {department.name}
             </option>
@@ -129,8 +136,8 @@ const EmployeeUpdateForm = ({ departments, setEmployees }) => {
           id="status"
           name="status"
           className="form-control border border-success rounded-3 shadow-sm"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
+          value={formData.status} // Bind value
+          onChange={handleChange}
           required
         >
           <option value="">Select a Status</option>
@@ -140,28 +147,28 @@ const EmployeeUpdateForm = ({ departments, setEmployees }) => {
         </select>
         <input
           type="text"
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.email} // Bind value
+          onChange={handleChange}
           required
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password} // Bind value
+          onChange={handleChange}
+          required
         />
         <div className="d-flex justify-content-between mt-3">
-          <button type="submit" className="btn btn-warning btn-sm">
-            Update
-          </button>
-          <button type="button" onClick={() => window.history.back()}>
-            Back
-          </button>
+
+           <button type="submit" className="btn btn-warning btn-sm">Update</button>
+          <button type="button" onClick={() => window.history.back()}>Back</button>
         </div>
       </form>
     </div>
   )
 }
-
 export default EmployeeUpdateForm
+

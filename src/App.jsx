@@ -10,6 +10,11 @@ import DepartmentDetails from './pages/department/DepartmentDetails'
 import DepartmentList from './pages/department/DepartmentList'
 import DepartmentUpdateForm from './pages/department/DepartmentUpdateForm'
 import DepartmentDeleteConfirm from './pages/department/DepartmentDeleteConfirm'
+import ShiftForm from './pages/shift/ShiftForm'
+import ShiftList from './pages/shift/ShiftList'
+import ShiftDetails from './pages/shift/ShiftDetails'
+import ShiftUpdateForm from './pages/shift/ShiftUpdateForm'
+import ShiftDeleteConfirm from './pages/shift/ShiftDeleteConfirm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
@@ -22,6 +27,8 @@ function App() {
   const [user, setUser] = useState()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [departments, setDepartments] = useState([])
+
+  const [shifts, setShifts] = useState([])
   const [employees, setEmployees] = useState([])
   const fetchDepartments = async () => {
     const token = localStorage.getItem('token')
@@ -77,6 +84,30 @@ function App() {
     }
   }, [isAuthenticated])
 
+  const getShifts = async () => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      try {
+        const response = await fetch(`${BASE_URL}/shifts`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        const data = await response.json()
+        setShifts(data)
+      } catch (error) {
+        console.error('Error fetching shifts:', error)
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getDepartments()
+      getShifts()
+    }
+  }, [isAuthenticated])
+
+  const [employees, setEmployees] = useState([])
+
   const handleLogin = () => {
     setIsAuthenticated(true)
   }
@@ -104,90 +135,23 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}
         {user ? (
-          <>
-            <Route path="/departmentlist" element={<DepartmentList />} />
-            <Route path="/departments/:id" element={<DepartmentDetails />} />
-            <Route
-              path="/newdepartment"
-              element={
-                <DepartmentForm
-                  departments={departments}
-                  setDepartments={setDepartments}
-                />
-              }
-            />
-            <Route
-              path="/updatedepartment/:id"
-              element={
-                <DepartmentUpdateForm
-                  departments={departments}
-                  setDepartments={setDepartments}
-                />
-              }
-            />
-            <Route
-              path="/deletedepartment/:id"
-              element={
-                <DepartmentDeleteConfirm
-                  departments={departments}
-                  setDepartments={setDepartments}
-                />
-              }
-            />
-          </>
+        <>
+        <Route path="/departmentlist" element={<DepartmentList />} />
+        <Route path="/departments/:id" element={<DepartmentDetails departments={departments}/>} />
+        <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
+        <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
+        <Route path="/deletedepartment/:id" element={<DepartmentDeleteConfirm departments={departments} setDepartments={setDepartments} />} />
+        </>
         ) : null}
 
-        {user ? (
-          <Route
-            path="/employees"
-            element={
-              <EmployeeList
-                employees={employees}
-                user={user}
-                departments={departments}
-              />
-            }
-            setEmployees={setEmployees}
-          />
-        ) : null}
-        {user ? (
-          <Route
-            path="/employees/:id"
-            element={<EmployeeDetails employees={employees} user={user} />}
-          />
-        ) : null}
-        {user ? (
-          <Route
-            path="/employees/update/:id"
-            element={
-              <EmployeeUpdateForm
-                departments={departments}
-                setEmployees={setEmployees}
-              />
-            }
-          />
-        ) : null}
-        {user ? (
-          <>
-            <Route
-              path="/newdepartment"
-              element={
-                <DepartmentForm
-                  departments={departments}
-                  setDepartments={setDepartments}
-                />
-              }
-            />
-            <Route
-              path="/updatedepartment/:id"
-              element={
-                <DepartmentUpdateForm
-                  departments={departments}
-                  setDepartments={setDepartments}
-                />
-              }
-            />
-          </>
+       {user ? (
+        <>
+        <Route path="/shifts" element={<ShiftList />} />
+        <Route path="/shift/:id" element={<ShiftDetails />} />
+        <Route path="/newshift" element={<ShiftForm shifts={shifts} setShifts={setShifts} />} />
+        <Route path="/updateshift/:id" element={<ShiftUpdateForm shifts={shifts} setShifts={setShifts} />} />
+        <Route path="/deleteshift/:id" element={<ShiftDeleteConfirm shifts={shifts} setShifts={setShifts} />} />
+        </>
         ) : null}
 
         {user ? (
