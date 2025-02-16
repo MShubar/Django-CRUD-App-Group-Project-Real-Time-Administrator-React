@@ -29,7 +29,7 @@ const EmployeeForm = ({ user, departments, setEmployees }) => {
     formDataToSend.append('password', formData.password);
 
     // Log FormData contents
-    console.log('Submitting new employee:==========>>');
+    //console.log('Submitting new employee:==========>>');
     formDataToSend.forEach((value, key) => {
       console.log(key, value);
     });

@@ -134,7 +134,7 @@ function App() {
         {user ? (
         <>
         <Route path="/departmentlist" element={<DepartmentList />} />
-        <Route path="/departments/:id" element={<DepartmentDetails />} />
+        <Route path="/departments/:id" element={<DepartmentDetails departments={departments}/>} />
         <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
         <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
         <Route path="/deletedepartment/:id" element={<DepartmentDeleteConfirm departments={departments} setDepartments={setDepartments} />} />
