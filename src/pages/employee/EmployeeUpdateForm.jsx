@@ -12,7 +12,7 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
     email: '',
     password: ''
   });
-
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -45,11 +45,10 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
         }
         const updatedEmployeeData = await response.json(); // Get the updated data from the response
         // Update the employees state
-        setEmployees((prevEmployees) =>
-          prevEmployees.map((emp) =>
-            emp._id === updatedEmployeeData._id ? updatedEmployeeData : emp)
-        );
-        //navigate(`/employees/${id}`);
+        setEmployees(prevEmployees => [...prevEmployees, updatedEmployeeData]);
+        console.log('Updated Employee :', updatedEmployeeData);
+        
+        navigate(`/employees/${id}`);
     } catch (error) {
       console.error('Error adding employee:', error);
     }
@@ -93,7 +92,7 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
   return (
     <div className="signup-container">
       <form onSubmit={handleSubmit} className="signup-form">
-        <h2>Add New Employee</h2>
+        <h2>Edit Employee</h2>
         <input
           type="text"
           name="name"
