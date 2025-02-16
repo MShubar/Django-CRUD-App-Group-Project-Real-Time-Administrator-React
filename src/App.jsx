@@ -27,9 +27,8 @@ function App() {
   const [user, setUser] = useState()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [departments, setDepartments] = useState([])
-
-  const [shifts, setShifts] = useState([])
   const [employees, setEmployees] = useState([])
+  const [shifts, setShifts] = useState([])
   const fetchDepartments = async () => {
     const token = localStorage.getItem('token')
     try {
@@ -101,12 +100,9 @@ function App() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      getDepartments()
       getShifts()
     }
   }, [isAuthenticated])
-
-  const [employees, setEmployees] = useState([])
 
   const handleLogin = () => {
     setIsAuthenticated(true)
@@ -135,23 +131,63 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}
         {user ? (
-        <>
-        <Route path="/departmentlist" element={<DepartmentList />} />
-        <Route path="/departments/:id" element={<DepartmentDetails departments={departments}/>} />
-        <Route path="/newdepartment" element={<DepartmentForm departments={departments} setDepartments={setDepartments} />} />
-        <Route path="/updatedepartment/:id" element={<DepartmentUpdateForm departments={departments} setDepartments={setDepartments} />} />
-        <Route path="/deletedepartment/:id" element={<DepartmentDeleteConfirm departments={departments} setDepartments={setDepartments} />} />
-        </>
+          <>
+            <Route path="/departmentlist" element={<DepartmentList />} />
+            <Route
+              path="/departments/:id"
+              element={<DepartmentDetails departments={departments} />}
+            />
+            <Route
+              path="/newdepartment"
+              element={
+                <DepartmentForm
+                  departments={departments}
+                  setDepartments={setDepartments}
+                />
+              }
+            />
+            <Route
+              path="/updatedepartment/:id"
+              element={
+                <DepartmentUpdateForm
+                  departments={departments}
+                  setDepartments={setDepartments}
+                />
+              }
+            />
+            <Route
+              path="/deletedepartment/:id"
+              element={
+                <DepartmentDeleteConfirm
+                  departments={departments}
+                  setDepartments={setDepartments}
+                />
+              }
+            />
+          </>
         ) : null}
 
-       {user ? (
-        <>
-        <Route path="/shifts" element={<ShiftList />} />
-        <Route path="/shift/:id" element={<ShiftDetails />} />
-        <Route path="/newshift" element={<ShiftForm shifts={shifts} setShifts={setShifts} />} />
-        <Route path="/updateshift/:id" element={<ShiftUpdateForm shifts={shifts} setShifts={setShifts} />} />
-        <Route path="/deleteshift/:id" element={<ShiftDeleteConfirm shifts={shifts} setShifts={setShifts} />} />
-        </>
+        {user ? (
+          <>
+            <Route path="/shift" element={<ShiftList />} />
+            <Route path="/shift/:id" element={<ShiftDetails />} />
+            <Route
+              path="/newshift"
+              element={<ShiftForm shifts={shifts} setShifts={setShifts} />}
+            />
+            <Route
+              path="/updateshift/:id"
+              element={
+                <ShiftUpdateForm shifts={shifts} setShifts={setShifts} />
+              }
+            />
+            <Route
+              path="/deleteshift/:id"
+              element={
+                <ShiftDeleteConfirm shifts={shifts} setShifts={setShifts} />
+              }
+            />
+          </>
         ) : null}
 
         {user ? (

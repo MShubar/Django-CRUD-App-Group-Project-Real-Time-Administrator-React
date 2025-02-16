@@ -1,52 +1,50 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../../servers/config';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../../servers/config'
 
 const ShiftForm = ({ shift, setShifts }) => {
-  const navigate = useNavigate();
-  const [name, setName] = useState(shift ? shift.name : '');
-  const [startTime, setStartTime] = useState(shift ? shift.startTime : '');
-  const [endTime, setEndTime] = useState(shift ? shift.endTime : '');
+  const navigate = useNavigate()
+  const [name, setName] = useState(shift ? shift.name : '')
+  const [startTime, setStartTime] = useState(shift ? shift.startTime : '')
+  const [endTime, setEndTime] = useState(shift ? shift.endTime : '')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem('token');
-    const method = shift ? 'PUT' : 'POST';
-    const url = shift
-      ? `${BASE_URL}/shift/${shift._id}`
-      : `${BASE_URL}/shift`;
+    e.preventDefault()
+    const token = localStorage.getItem('token')
+    const method = shift ? 'PUT' : 'POST'
+    const url = shift ? `${BASE_URL}/shift/${shift._id}` : `${BASE_URL}/shift`
 
-    const newShift = { name, startTime, endTime };
+    const newShift = { name, startTime, endTime }
 
     try {
       const response = await fetch(url, {
         method: method,
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newShift),
-      });
+        body: JSON.stringify(newShift)
+      })
 
       if (!response.ok) {
-        throw new Error('Failed to save shift');
+        throw new Error('Failed to save shift')
       }
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (shift) {
         setShifts((prevShifts) =>
           prevShifts.map((s) => (s._id === data._id ? data : s))
-        );
+        )
       } else {
-        setShifts((prevShifts) => [...prevShifts, data]);
+        setShifts((prevShifts) => [...prevShifts, data])
       }
 
-      navigate('/shifts'); 
+      navigate('/shift')
     } catch (error) {
-      console.error('Error saving shift:', error);
+      console.error('Error saving shift:', error)
     }
-  };
+  }
 
   return (
     <div>
@@ -85,7 +83,7 @@ const ShiftForm = ({ shift, setShifts }) => {
         <button type="submit">{shift ? 'Update' : 'Create'} Shift</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ShiftForm;
+export default ShiftForm
