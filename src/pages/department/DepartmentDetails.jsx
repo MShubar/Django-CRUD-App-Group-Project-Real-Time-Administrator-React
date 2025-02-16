@@ -79,7 +79,7 @@ return (
 
             <button
               className="btn btn-secondary btn-sm mb-2"
-              onClick={() => navigate(-1)} 
+              onClick={() => navigate('/departmentlist')} 
             >
               Back
             </button>
