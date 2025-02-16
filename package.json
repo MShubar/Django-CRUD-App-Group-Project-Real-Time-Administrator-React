@@ -21,6 +21,7 @@
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "framer-motion": "^12.4.1",
+    "gsap": "^3.12.7",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-datepicker": "^8.0.0",

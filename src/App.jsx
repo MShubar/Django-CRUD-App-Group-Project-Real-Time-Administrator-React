@@ -16,8 +16,7 @@ import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
 import DeleteEmployee from './pages/employee/DeleteEmployee'
 import { useState, useEffect } from 'react'
 import { BASE_URL } from './servers/config'
-import 'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
-import Background from './components/Background'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   const [user, setUser] = useState()
@@ -89,8 +88,11 @@ function App() {
 
   return (
     <>
-      <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
-      <Background />
+      <Navbar
+        isAuthenticated={isAuthenticated}
+        role={user?.role}
+        onLogout={handleLogout}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
