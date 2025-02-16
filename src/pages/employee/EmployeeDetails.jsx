@@ -38,7 +38,7 @@ const EmployeeDetails = () => {
   }
 
   return (
-    <div className="employee-details">
+    <div className="signup-container">
       <h2>Employee Details</h2>
       <p>
         <strong>Name:</strong> {employee.name}

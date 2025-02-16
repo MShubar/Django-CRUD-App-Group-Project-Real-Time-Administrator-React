@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import '../styles/components/Navbar.css'
 import LightDark from './Dark-Light-Button'
-
+import Logo from '../styles/Logo.svg'
 function Navbar({ isAuthenticated, onLogout }) {
   const handleClick = () => {
     onLogout()
@@ -12,18 +12,20 @@ function Navbar({ isAuthenticated, onLogout }) {
         <div className="nav-links">
           {!isAuthenticated && (
             <NavLink to="/" className="logo">
-              RTA
+              <img src={Logo} alt="logo" />
             </NavLink>
           )}
           {isAuthenticated && (
             <NavLink to="/dashboard" className="logo">
-              RTA
+              <img src={Logo} alt="logo" />
             </NavLink>
           )}
           {!isAuthenticated && <NavLink to="/">Home</NavLink>}
           {isAuthenticated && <NavLink to="/dashboard">Dashboard</NavLink>}
-          {isAuthenticated && <NavLink to="/departmentlist">Department</NavLink>}
-          {isAuthenticated && <NavLink to="/shifts">Shift</NavLink>}
+          {isAuthenticated && (
+            <NavLink to="/departmentlist">Department</NavLink>
+          )}
+          {isAuthenticated && <NavLink to="/shift">Shift</NavLink>}
           {isAuthenticated && <NavLink to="/employees">Employee</NavLink>}
         </div>
         <div className="reg-btn">

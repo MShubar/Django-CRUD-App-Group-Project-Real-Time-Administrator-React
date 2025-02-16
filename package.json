@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "npm run dev"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.15",
@@ -22,6 +23,7 @@
     "framer-motion": "^12.4.1",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
+    "react-datepicker": "^8.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "react-slick": "^0.30.3",

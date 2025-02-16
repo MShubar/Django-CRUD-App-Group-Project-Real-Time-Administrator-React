@@ -1,24 +1,45 @@
-import { useState } from 'react'
-import Employee from '../../components/Employee'
-import AddEmployeeForm from './EmployeeForm'
-import EmployeeDetails from './EmployeeDetails' // Import the new details component
+import { useState } from 'react';
+import Employee from '../../components/Employee';
+import { NavLink } from 'react-router-dom';
+import EmployeeForm from './EmployeeForm';
+import EmployeeDetails from './EmployeeDetails';
+import { BASE_URL } from '../../servers/config';
 
-const EmployeeList = ({ employees }) => {
-  const [showForm, setShowForm] = useState(false) // State to control the add form visibility
-  const [selectedEmployee, setSelectedEmployee] = useState(null) // State to hold the selected employee for details
+const EmployeeList = ({ employees, user, departments, setEmployees }) => {
+  //console.log("departments==============",departments);
+  
+  const [showForm, setShowForm] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  const handleAddEmployee = (newEmployee) => {
-    console.log('New Employee Added:', newEmployee)
-    // Logic to add the new employee
-  }
+  // const handleAddEmployee = async (newEmployee) => {
+  //   const token = localStorage.getItem('token'); // Retrieve the token
+  //   try {
+      
+  //     const response = await fetch(`${BASE_URL}/employees/new`, {
+  //       method: 'POST', // Use POST to add a new employee
+  //       body: newEmployee, // Convert the new employee data to JSON
+  //     });
+  //     //console.log('Response body=============:', response);
+  //     const data = await response.json()
+  //     if (!response.ok) {
+  //       throw new Error(`Failed to add employee: ${data.error} `);
+  //     }
+
+  //     const addedEmployee = await response.json(); // Parse the response to get the added employee
+  //     setEmployees((prevEmployees) => [...prevEmployees, addedEmployee]); // Update the state with the new employee
+  //     console.log('New Employee Added:', addedEmployee);
+  //   } catch (error) {
+  //     console.error('Error adding employee:', error);
+  //   }
+  // };
 
   const handleRowClick = (employee) => {
-    setSelectedEmployee(employee) // Set the selected employee
-  }
+    setSelectedEmployee(employee);
+  };
 
   const handleCloseDetails = () => {
-    setSelectedEmployee(null) // Close the details view
-  }
+    setSelectedEmployee(null);
+  };
 
   return (
     <div className="container my-4">
@@ -31,17 +52,13 @@ const EmployeeList = ({ employees }) => {
           {showForm ? 'Cancel' : 'New Employee'}
         </button>
       </div>
-      {showForm && <AddEmployeeForm onAdd={handleAddEmployee} />}
-
+      {showForm && <EmployeeForm user={user} departments={departments} setEmployees={setEmployees}/>}
+ 
       <section className="employee-list">
         <div className="row gy-3">
           {employees.map((employee) => (
-            <div
-              className="col-12"
-              key={employee._id}
-              onClick={() => handleRowClick(employee)}
-            >
-              <Employee employee={employee} />
+            <div className="col-12" key={employee._id} onClick={() => handleRowClick(employee)}>
+              <Employee employee={employee} departments={departments}/>
             </div>
           ))}
         </div>
@@ -50,11 +67,11 @@ const EmployeeList = ({ employees }) => {
       {selectedEmployee && (
         <EmployeeDetails
           employee={selectedEmployee}
-          onClose={handleCloseDetails} // Pass in the close handler
+          onClose={handleCloseDetails}
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default EmployeeList
+export default EmployeeList;
