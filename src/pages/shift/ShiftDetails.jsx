@@ -49,7 +49,7 @@ const ShiftDetails = () => {
             Delete
           </button>
 
-          <button onClick={() => navigate('/shifts')} className="btn btn-secondary btn-sm mb-2">
+          <button onClick={() => navigate('/shift')} className="btn btn-secondary btn-sm mb-2">
             Back to List
           </button>
         </>
