@@ -87,7 +87,7 @@ function App() {
     const token = localStorage.getItem('token')
     if (token) {
       try {
-        const response = await fetch(`${BASE_URL}/shifts`, {
+        const response = await fetch(`${BASE_URL}/shift`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         const data = await response.json()
