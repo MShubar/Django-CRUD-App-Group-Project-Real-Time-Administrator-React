@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { BASE_URL } from '../../servers/config';
 import { useParams, useNavigate } from 'react-router-dom';
 const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
+  //console.log("==============user===========",user);
+  
   const { id } = useParams();
   const [formData, setFormData] = useState({
     name: '',
@@ -45,8 +47,12 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
         }
         const updatedEmployeeData = await response.json(); // Get the updated data from the response
         // Update the employees state
-        setEmployees(prevEmployees => [...prevEmployees, updatedEmployeeData]);
-        console.log('Updated Employee :', updatedEmployeeData);
+        setEmployees(prevEmployees => 
+          prevEmployees.map(employee => 
+            employee._id === updatedEmployeeData._id ? updatedEmployeeData : employee
+          )
+        );
+        console.log('Updated Employee:', updatedEmployeeData);
         
         navigate(`/employees/${id}`);
     } catch (error) {
@@ -159,7 +165,7 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
           placeholder="Password"
           value={formData.password} // Bind value
           onChange={handleChange}
-          required
+          
         />
         <div className="d-flex justify-content-between mt-3">
 
