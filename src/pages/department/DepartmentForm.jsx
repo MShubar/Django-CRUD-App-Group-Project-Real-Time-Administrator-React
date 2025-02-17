@@ -43,8 +43,8 @@ const DepartmentForm = ({ departments, setDepartments }) => {
   }
 
   return (
-    <div>
-      <h1>Create a Department</h1>
+    <div className="signup-container">
+      <h2>Create a Department</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Department Name:</label>
         <input

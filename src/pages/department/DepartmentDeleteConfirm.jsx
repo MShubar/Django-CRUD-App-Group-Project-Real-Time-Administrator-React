@@ -6,6 +6,7 @@ const DepartmentDeleteConfirm = ({ departments, setDepartments }) => {
   const { id } = useParams()
 
   const deleteDepartment = async () => {
+    console.log('Delete button clicked');
     const token = localStorage.getItem('token')
     try {
       const response = await fetch(`${BASE_URL}/department/${id}`, {
@@ -37,7 +38,7 @@ const DepartmentDeleteConfirm = ({ departments, setDepartments }) => {
         Are you sure you want to delete this department?
         <br />
         <font color="red" size="5">
-          <b>Deleting this department will remove it permanently!</b>
+          <b>Deleting this department will also delete all employees associated with it.</b>
         </font>
       </h2>
 
