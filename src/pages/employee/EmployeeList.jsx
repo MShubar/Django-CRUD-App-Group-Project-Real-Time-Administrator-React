@@ -11,28 +11,6 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
   const [showForm, setShowForm] = useState(false)
   const [selectedEmployee, setSelectedEmployee] = useState(null)
 
-  // const handleAddEmployee = async (newEmployee) => {
-  //   const token = localStorage.getItem('token'); // Retrieve the token
-  //   try {
-
-  //     const response = await fetch(`${BASE_URL}/employees/new`, {
-  //       method: 'POST', // Use POST to add a new employee
-  //       body: newEmployee, // Convert the new employee data to JSON
-  //     });
-  //     //console.log('Response body=============:', response);
-  //     const data = await response.json()
-  //     if (!response.ok) {
-  //       throw new Error(`Failed to add employee: ${data.error} `);
-  //     }
-
-  //     const addedEmployee = await response.json(); // Parse the response to get the added employee
-  //     setEmployees((prevEmployees) => [...prevEmployees, addedEmployee]); // Update the state with the new employee
-  //     console.log('New Employee Added:', addedEmployee);
-  //   } catch (error) {
-  //     console.error('Error adding employee:', error);
-  //   }
-  // };
-
   const handleRowClick = (employee) => {
     setSelectedEmployee(employee)
   }
@@ -66,7 +44,7 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
             <div
               className="col-12"
               key={employee._id}
-              onClick={() => handleRowClick(employee)}
+              
             >
               <Employee employee={employee} departments={departments} />
             </div>
@@ -74,13 +52,7 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
         </div>
       </section>
 
-      {selectedEmployee && (
-        <EmployeeDetails
-          employee={selectedEmployee}
-          onClose={handleCloseDetails}
-        />
-      )}
-    </div>
+      </div>
   )
 }
 

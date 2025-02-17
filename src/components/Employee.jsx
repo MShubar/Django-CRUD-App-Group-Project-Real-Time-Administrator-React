@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom'
 const Employee = ({ employee, departments }) => {
   // Find the department object based on departmentId
   const department = departments.find(
-    (dept) => dept._id === employee.departmentId[0]
+    (dept) => dept._id === employee.departmentId
   )
-  const departmentName = department ? department.name : 'Unknown Department'
-
   return (
     <Link to={`/employees/${employee._id}`} className="text-decoration-none">
       <div className="card mb-4 border-0 shadow-sm">
@@ -22,7 +20,7 @@ const Employee = ({ employee, departments }) => {
               {employee.position}
             </h5>
             <h5 className="card-title text-primary fw-bold mb-0">
-              {departmentName} {/* Display the department name */}
+            {departments.find(department => department._id === employee.departmentId[0])?.name || 'Department Not Found'}
             </h5>
             <h5 className="card-title text-primary fw-bold mb-0">
               {employee.status}

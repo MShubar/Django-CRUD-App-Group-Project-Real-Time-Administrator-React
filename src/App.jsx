@@ -15,6 +15,7 @@ import ShiftList from './pages/shift/ShiftList'
 import ShiftDetails from './pages/shift/ShiftDetails'
 import ShiftUpdateForm from './pages/shift/ShiftUpdateForm'
 import ShiftDeleteConfirm from './pages/shift/ShiftDeleteConfirm'
+import EmployeeForm from './pages/employee/EmployeeForm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
@@ -205,15 +206,16 @@ function App() {
         ) : null}
         {user ? (
           <Route
-            path="/employees/:id"
-            element={<EmployeeDetails employees={employees} user={user} />}
+            path="/employees/:employeeId"
+            element={<EmployeeDetails employees={employees} user={user}  departments={departments}/>}
           />
         ) : null}
         {user ? (
           <Route
-            path="/employees/update/:id"
+            path="/employees/new"
             element={
-              <EmployeeUpdateForm
+              <EmployeeForm
+              user={user}
                 departments={departments}
                 setEmployees={setEmployees}
               />
@@ -241,7 +243,7 @@ function App() {
         {user ? (
           <Route
             path="/employees/update/:id"
-            element={<EmployeeUpdateForm employees={employees} user={user} />}
+            element={<EmployeeUpdateForm employees={employees} user={user} departments={departments}/>}
           />
         ) : null}
         {user ? (
