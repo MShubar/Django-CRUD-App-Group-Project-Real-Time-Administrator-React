@@ -11,7 +11,6 @@ const Dashboard = () => {
   const [shifts, setShifts] = useState([])
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [selectedEmployee, setSelectedEmployee] = useState('')
-
   const [selectedShift, setSelectedShift] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
@@ -29,7 +28,6 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`
           }
         })
-
         if (!employeeResponse.ok) throw new Error('Failed to fetch employees')
         const employees = await employeeResponse.json()
         const formattedResources = employees.map((employee) => ({
@@ -46,7 +44,6 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`
           }
         })
-
         if (!shiftResponse.ok) throw new Error('Failed to fetch shifts')
         const availableShifts = await shiftResponse.json()
         setShifts(availableShifts)
@@ -64,20 +61,30 @@ const Dashboard = () => {
           throw new Error('Failed to fetch employee shifts')
         const shiftsData = await shiftDataResponse.json()
 
-        const formattedEvents = shiftsData.map((shift) => {
-          const employee = resources.find((res) => res.id === shift.employeeId)
+        const formattedEvents = shiftsData
+          .filter((shift) => {
+            const loggedInEmployeeId = localStorage.getItem('employeeId') // Assuming the employee ID is stored in localStorage
+            // If the logged-in user is an employee, show only their shifts
+            return loggedInEmployeeId
+              ? shift.employeeId === loggedInEmployeeId
+              : true
+          })
+          .map((shift) => {
+            const employee = resources.find(
+              (res) => res.id === shift.employeeId
+            )
 
-          return {
-            id: shift._id,
-            resourceId: shift.employeeId,
-            title: shift.shiftId.name,
-            start: new Date(shift.startDate).toISOString(),
-            end: new Date(shift.endDate).toISOString(),
-            backgroundColor: '#28a745',
-            borderColor: '#28a745',
-            extendedProps: { ...shift }
-          }
-        })
+            return {
+              id: shift._id,
+              resourceId: shift.employeeId,
+              title: shift.shiftId.name,
+              start: new Date(shift.startDate).toISOString(),
+              end: new Date(shift.endDate).toISOString(),
+              backgroundColor: '#28a745',
+              borderColor: '#28a745',
+              extendedProps: { ...shift }
+            }
+          })
 
         setEvents(formattedEvents)
       } catch (error) {

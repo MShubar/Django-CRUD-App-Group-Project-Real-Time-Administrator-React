@@ -22,6 +22,8 @@ import DeleteEmployee from './pages/employee/DeleteEmployee'
 import { useState, useEffect } from 'react'
 import { BASE_URL } from './servers/config'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import NotFound from './pages/NotFound'
+import CompanyProfile from './pages/home/CompanyProfile'
 
 function App() {
   const [user, setUser] = useState()
@@ -38,7 +40,6 @@ function App() {
           Authorization: `Bearer ${token}`
         }
       })
-
       if (!response.ok) {
         throw new Error('Failed to fetch departments')
       }
@@ -87,7 +88,7 @@ function App() {
     const token = localStorage.getItem('token')
     if (token) {
       try {
-        const response = await fetch(`${BASE_URL}/shifts`, {
+        const response = await fetch(`${BASE_URL}/shift`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         const data = await response.json()
@@ -256,8 +257,12 @@ function App() {
             }
           />
         ) : null}
+        {user ? (
+          <Route path="/editProfile" element={<CompanyProfile />} />
+        ) : null}
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      <Footer isAuthenticated={isAuthenticated} role={user?.role} />
     </>
   )
 }
