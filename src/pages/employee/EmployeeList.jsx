@@ -1,8 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Employee from '../../components/Employee'
-import { NavLink } from 'react-router-dom'
 import EmployeeForm from './EmployeeForm'
-import EmployeeDetails from './EmployeeDetails'
 import { BASE_URL } from '../../servers/config'
 
 const EmployeeList = ({ employees, user, departments, setEmployees }) => {
@@ -10,29 +8,33 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
 
   const [showForm, setShowForm] = useState(false)
   const [selectedEmployee, setSelectedEmployee] = useState(null)
+const getAllEmployees = async () => {
+    const token = localStorage.getItem('token')
+    //console.log("Token:", token);
+    if (token) {
+      try {
+        const response = await fetch(`${BASE_URL}/employees`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+        const data = await response.json()
 
-  // const handleAddEmployee = async (newEmployee) => {
-  //   const token = localStorage.getItem('token'); // Retrieve the token
-  //   try {
-
-  //     const response = await fetch(`${BASE_URL}/employees/new`, {
-  //       method: 'POST', // Use POST to add a new employee
-  //       body: newEmployee, // Convert the new employee data to JSON
-  //     });
-  //     //console.log('Response body=============:', response);
-  //     const data = await response.json()
-  //     if (!response.ok) {
-  //       throw new Error(`Failed to add employee: ${data.error} `);
-  //     }
-
-  //     const addedEmployee = await response.json(); // Parse the response to get the added employee
-  //     setEmployees((prevEmployees) => [...prevEmployees, addedEmployee]); // Update the state with the new employee
-  //     console.log('New Employee Added:', addedEmployee);
-  //   } catch (error) {
-  //     console.error('Error adding employee:', error);
-  //   }
-  // };
-
+        if (!response.ok) {
+          console.error('Error fetching employees:', data.message) // Log any error messages
+          if (response.status === 401) {
+            console.error('Unauthorized access, redirecting to sign-in')
+          }
+          return
+        }
+        setEmployees(data) // Set the employees state
+      } catch (error) {
+        console.error('Error fetching employees:', error)
+      }
+    }
+  }
   const handleRowClick = (employee) => {
     setSelectedEmployee(employee)
   }
@@ -40,7 +42,11 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
   const handleCloseDetails = () => {
     setSelectedEmployee(null)
   }
-
+useEffect(() => {
+    
+      getAllEmployees()
+   
+  }, [])
   return (
     <div className="container my-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -57,6 +63,8 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
           user={user}
           departments={departments}
           setEmployees={setEmployees}
+          employees={employees}
+          setShowForm={setShowForm}
         />
       )}
 
@@ -66,7 +74,7 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
             <div
               className="col-12"
               key={employee._id}
-              onClick={() => handleRowClick(employee)}
+              
             >
               <Employee employee={employee} departments={departments} />
             </div>
@@ -74,13 +82,7 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
         </div>
       </section>
 
-      {selectedEmployee && (
-        <EmployeeDetails
-          employee={selectedEmployee}
-          onClose={handleCloseDetails}
-        />
-      )}
-    </div>
+      </div>
   )
 }
 

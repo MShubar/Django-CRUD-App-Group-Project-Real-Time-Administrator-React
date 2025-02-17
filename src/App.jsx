@@ -15,6 +15,7 @@ import ShiftList from './pages/shift/ShiftList'
 import ShiftDetails from './pages/shift/ShiftDetails'
 import ShiftUpdateForm from './pages/shift/ShiftUpdateForm'
 import ShiftDeleteConfirm from './pages/shift/ShiftDeleteConfirm'
+import EmployeeForm from './pages/employee/EmployeeForm'
 import EmployeeList from './pages/employee/EmployeeList'
 import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
@@ -50,37 +51,10 @@ function App() {
       console.error('Error fetching departments:', error)
     }
   }
-  const getAllEmployees = async () => {
-    const token = localStorage.getItem('token')
-    //console.log("Token:", token);
-    if (token) {
-      try {
-        const response = await fetch(`${BASE_URL}/employees`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
-        })
-        const data = await response.json()
 
-        if (!response.ok) {
-          console.error('Error fetching employees:', data.message) // Log any error messages
-          if (response.status === 401) {
-            console.error('Unauthorized access, redirecting to sign-in')
-          }
-          return
-        }
-        setEmployees(data) // Set the employees state
-      } catch (error) {
-        console.error('Error fetching employees:', error)
-      }
-    }
-  }
   useEffect(() => {
     if (isAuthenticated) {
       fetchDepartments()
-      getAllEmployees()
     }
   }, [isAuthenticated])
 
@@ -199,23 +173,6 @@ function App() {
                 employees={employees}
                 user={user}
                 departments={departments}
-              />
-            }
-            setEmployees={setEmployees}
-          />
-        ) : null}
-        {user ? (
-          <Route
-            path="/employees/:id"
-            element={<EmployeeDetails employees={employees} user={user} />}
-          />
-        ) : null}
-        {user ? (
-          <Route
-            path="/employees/update/:id"
-            element={
-              <EmployeeUpdateForm
-                departments={departments}
                 setEmployees={setEmployees}
               />
             }
@@ -223,9 +180,9 @@ function App() {
         ) : null}
         {user ? (
           <Route
-            path="/employees"
+            path="/employees/:employeeId"
             element={
-              <EmployeeList
+              <EmployeeDetails
                 employees={employees}
                 user={user}
                 departments={departments}
@@ -235,14 +192,28 @@ function App() {
         ) : null}
         {user ? (
           <Route
-            path="/employees/:id"
-            element={<EmployeeDetails employees={employees} user={user} />}
+            path="/employees/new"
+            element={
+              <EmployeeForm
+                user={user}
+                departments={departments}
+                setEmployees={setEmployees}
+              />
+            }
           />
         ) : null}
+
         {user ? (
           <Route
             path="/employees/update/:id"
-            element={<EmployeeUpdateForm employees={employees} user={user} />}
+            element={
+              <EmployeeUpdateForm
+                employees={employees}
+                user={user}
+                departments={departments}
+                setEmployees={setEmployees}
+              />
+            }
           />
         ) : null}
         {user ? (

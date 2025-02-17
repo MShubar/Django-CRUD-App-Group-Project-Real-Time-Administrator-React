@@ -1,17 +1,17 @@
-// EmployeeDetails.jsx
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { BASE_URL } from '../../servers/config'
-import { Link } from 'react-router-dom'
 
-const EmployeeDetails = ({departments}) => {
-  const { id } = useParams() // Get the employee ID from the URL
+const EmployeeDetails = ({ departments }) => {
+  const { employeeId } = useParams() // Get the employee ID from the URL
+  console.log('=========employeeId=======>', employeeId)
+
   const [employee, setEmployee] = useState(null)
 
   useEffect(() => {
     const fetchEmployeeDetails = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/employees/${id}`, {
+        const response = await fetch(`${BASE_URL}/employees/${employeeId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -19,11 +19,14 @@ const EmployeeDetails = ({departments}) => {
           }
         })
 
+        console.log('======response=========', response.ok)
+
         if (!response.ok) {
           throw new Error('Failed to fetch employee details')
         }
 
         const employeeData = await response.json()
+        console.log('Fetched Employee Data:', employeeData)
         setEmployee(employeeData)
       } catch (error) {
         console.error('Error fetching employee details:', error)
@@ -31,7 +34,7 @@ const EmployeeDetails = ({departments}) => {
     }
 
     fetchEmployeeDetails()
-  }, [id])
+  }, [employeeId])
 
   if (!employee) {
     return <div>Loading...</div>
@@ -47,14 +50,15 @@ const EmployeeDetails = ({departments}) => {
         <strong>Position:</strong> {employee.position}
       </p>
       <p>
-  <strong>Department :</strong> 
-  {departments.find(department => department._id === employee.departmentId[0])?.name || 'Department Not Found'}
-</p>
+        <strong>Department:</strong>
+        {departments.find(
+          (department) => department._id === employee.departmentId[0]
+        )?.name || 'Department Not Found'}
+      </p>
       <p>
         <strong>Status:</strong> {employee.status}
       </p>
-      <button onClick={() => window.history.back()}>Back</button>{' '}
-      {/* Use back button to go to the previous page */}
+      <button onClick={() => window.history.back()}>Back</button>
       <div className="d-flex justify-content-between mt-3">
         <Link
           className="btn btn-warning btn-sm"
