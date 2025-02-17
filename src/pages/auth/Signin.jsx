@@ -27,14 +27,11 @@ function Signin({ handleLogin, setUser }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formDataToSend)
       }).then((response) => response.json())
-      console.log(response)
-
       setUser(response.user)
       const token = response.token
       localStorage.setItem('token', token)
       localStorage.setItem('userId', response.user._id)
       handleLogin()
-      console.log('Login')
       navigate('/dashboard')
       setFormData(initialFormData)
     } catch (error) {

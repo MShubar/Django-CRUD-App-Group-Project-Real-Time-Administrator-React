@@ -52,9 +52,8 @@ const ShiftUpdateForm = () => {
         throw new Error('Failed to update shift')
       }
 
-      const updatedShift = await response.json();
-      navigate(`/shift/${updatedShift._id}`);
-
+      const updatedShift = await response.json()
+      navigate(`/shift/${updatedShift._id}`)
     } catch (error) {
       console.error('Error updating shift:', error)
     }

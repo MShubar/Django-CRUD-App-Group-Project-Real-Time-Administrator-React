@@ -2,20 +2,26 @@ import { NavLink } from 'react-router-dom'
 import '../styles/components/Navbar.css'
 import LightDark from './Dark-Light-Button'
 import Logo from '../styles/Logo.svg'
+import Profile from './Profile'
 
 function Navbar({ isAuthenticated, role, onLogout }) {
   const handleClick = () => {
     onLogout()
   }
-
   return (
     <>
       <section className="navbar">
         <div className="nav-links">
-          <NavLink to={isAuthenticated ? '/dashboard' : '/'} className="logo">
-            <img src={Logo} alt="logo" />
-          </NavLink>
-
+          {isAuthenticated && (
+            <NavLink to="/dashboard">
+              <img src={Logo} alt="logo" />
+            </NavLink>
+          )}
+          {!isAuthenticated && (
+            <NavLink to="/">
+              <img src={Logo} alt="logo" />
+            </NavLink>
+          )}
           {!isAuthenticated && <NavLink to="/">Home</NavLink>}
           {isAuthenticated && <NavLink to="/dashboard">Dashboard</NavLink>}
 
@@ -24,12 +30,11 @@ function Navbar({ isAuthenticated, role, onLogout }) {
             <NavLink to="/departmentlist">Department</NavLink>
           )}
           {role === 'company' && <NavLink to="/shift">Shift</NavLink>}
-          {(role === 'company' || role === 'employee') && (
-            <NavLink to="/employees">Employee</NavLink>
-          )}
+          {role === 'company' && <NavLink to="/employees">Employee</NavLink>}
         </div>
 
         <div className="reg-btn">
+          {isAuthenticated && <Profile />}
           <LightDark />
           {!isAuthenticated ? (
             <>

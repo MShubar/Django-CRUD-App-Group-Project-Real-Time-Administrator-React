@@ -83,18 +83,14 @@ const ShiftSchedule = () => {
     { id: 'i', title: 'Ali' }
   ]
 
-  // Sort the resources alphabetically
   resources.sort((a, b) => a.title.localeCompare(b.title))
 
-  // Match the events with the sorted resources
   const matchedEvents = events.map((event) => {
     const matchedResource = resources.find(
       (resource) => resource.id === event.resourceId
     )
     return { ...event, resource: matchedResource }
   })
-
-  console.log(matchedEvents)
 
   return (
     <motion.div

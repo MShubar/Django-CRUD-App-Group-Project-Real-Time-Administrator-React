@@ -1,6 +1,6 @@
 import '../styles/components/Footer.css'
 import { NavLink } from 'react-router-dom'
-function Footer({ isAuthenticated }) {
+function Footer({ isAuthenticated, role, onLogout }) {
   return (
     <>
       <section className="footer">
@@ -19,6 +19,21 @@ function Footer({ isAuthenticated }) {
           {!isAuthenticated && (
             <NavLink to="/signup" className="column-text">
               Sign Up
+            </NavLink>
+          )}
+          {isAuthenticated && (
+            <NavLink to="/dashboard" className="column-text">
+              Dashboard
+            </NavLink>
+          )}
+          {isAuthenticated && (
+            <NavLink to="/departmentlist" className="column-text">
+              Department List
+            </NavLink>
+          )}
+          {isAuthenticated && (
+            <NavLink to="/shift" className="column-text">
+              Shift List
             </NavLink>
           )}
         </div>
