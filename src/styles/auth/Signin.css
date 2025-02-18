@@ -1,0 +1,112 @@
+/* Full-page Centering */
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Sign-in Form Container */
+.SigninForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  min-height: 500px;
+  border-radius: 20px;
+  gap: 1%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Adds a slight hover effect */
+.SigninForm:hover {
+  transform: scale(1.02);
+}
+
+/* Left Panel - Form */
+.SigninBorders {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  max-width: 600px;
+  padding: 50px;
+  min-height: 500px;
+  background: rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Sign-in Form Fields */
+.formClass {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.formClass input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  text-align: center;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.formClass input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.formClass input:focus {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Submit Button */
+.formClass button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: bold;
+}
+
+.formClass button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Right Panel - Text */
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  max-width: 400px;
+  border-radius: 20px;
+  height: 63vh;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
