@@ -33,9 +33,9 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
 
     // Log FormData contents
     //console.log('Submitting new employee:==========>>');
-    formDataToSend.forEach((value, key) => {
-      console.log(key, value);
-    });
+    // formDataToSend.forEach((value, key) => {
+    //   console.log(key, value);
+    // });
 
     try {
       const response = await fetch(`${BASE_URL}/employees/${id}`, {
