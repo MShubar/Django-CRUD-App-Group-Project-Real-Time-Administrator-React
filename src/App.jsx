@@ -25,6 +25,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import NotFound from './pages/NotFound'
 import CompanyProfile from './pages/home/CompanyProfile'
 import CompanyUpdateForm from './pages/home/CompanyUpdateForm'
+import CompanyDeleteConfirm from './pages/home/CompanyDeleteConfirm'
 
 function App() {
   const [user, setUser] = useState()
@@ -193,7 +194,16 @@ function App() {
           <Route path="/editProfile" element={<CompanyProfile user={user} />} />
         ) : null}
         {user ? (
-          <Route path="/editProfile/update/:id" element={<CompanyUpdateForm user={user} />} />
+          <Route
+            path="/editProfile/update/:id"
+            element={<CompanyUpdateForm user={user} />}
+          />
+        ) : null}
+        {user ? (
+          <Route
+            path="/editProfile/delete/:id"
+            element={<CompanyDeleteConfirm user={user} />}
+          />
         ) : null}
         <Route path="*" element={<NotFound />} />
       </Routes>
