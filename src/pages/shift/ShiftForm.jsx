@@ -45,109 +45,64 @@ const ShiftForm = ({ shift, setShifts }) => {
       console.error('Error saving shift:', error)
     }
   }
+  return (
+    <div className="page">
+      <div className="SigninForm">
+        <div className="SigninBorders">
+          <h2 className="text-center">
+            {shift ? 'Edit Shift' : 'Create Shift'}
+          </h2>
+          <form onSubmit={handleSubmit} className="form-group">
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Shift Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                className="form-control"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
 
-//   return (
-//     <div>
-//       <h2>{shift ? 'Edit Shift' : 'Create Shift'}</h2>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label htmlFor="name">Shift Name</label>
-//           <input
-//             id="name"
-//             type="text"
-//             value={name}
-//             onChange={(e) => setName(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label htmlFor="startTime">Start Time</label>
-//           <input
-//             id="startTime"
-//             type="time"
-//             value={startTime}
-//             onChange={(e) => setStartTime(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label htmlFor="endTime">End Time</label>
-//           <input
-//             id="endTime"
-//             type="time"
-//             value={endTime}
-//             onChange={(e) => setEndTime(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <button type="submit">{shift ? 'Update' : 'Create'} Shift</button>
-//       </form>
-//     </div>
-//   )
-// }
+            <div className="mb-3">
+              <label htmlFor="startTime" className="form-label">
+                Start Time
+              </label>
+              <input
+                id="startTime"
+                type="time"
+                className="form-control"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                required
+              />
+            </div>
 
-// export default ShiftForm
+            <div className="mb-3">
+              <label htmlFor="endTime" className="form-label">
+                End Time
+              </label>
+              <input
+                id="endTime"
+                type="time"
+                className="form-control"
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+                required
+              />
+            </div>
 
-
-return (
-  <div className="container my-4">
-  <div className="row justify-content-center">
-    <div className="col-md-6 col-lg-4">
-      <div className="card p-4">
-        <h2 className="text-center">{shift ? 'Edit Shift' : 'Create Shift'}</h2>
-        <form onSubmit={handleSubmit} className="form-group">
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Shift Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              className="form-control"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="startTime" className="form-label">
-              Start Time
-            </label>
-            <input
-              id="startTime"
-              type="time"
-              className="form-control"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="endTime" className="form-label">
-              End Time
-            </label>
-            <input
-              id="endTime"
-              type="time"
-              className="form-control"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary w-100">
-            {shift ? 'Update Shift' : 'Create Shift'}
-          </button>
-        </form>
+            <button type="submit" className="btn btn-primary w-100">
+              {shift ? 'Update Shift' : 'Create Shift'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  )
+}
 
-);
-};
-
-export default ShiftForm;
+export default ShiftForm
