@@ -52,6 +52,7 @@ const DepartmentForm = ({ departments, setDepartments }) => {
           id="name"
           value={formValues.name}
           onChange={handleChange}
+          required
         />
         <br />
 

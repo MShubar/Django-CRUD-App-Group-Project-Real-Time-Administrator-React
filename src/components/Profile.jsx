@@ -30,7 +30,7 @@ function Profile() {
   }, [])
 
   return (
-    <div class="dropdown">
+    <div className="dropdown">
       <img
         className="ProfilePicture"
         src={company?.logoImage}

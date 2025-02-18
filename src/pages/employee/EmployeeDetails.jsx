@@ -4,7 +4,7 @@ import { BASE_URL } from '../../servers/config';
 
 const EmployeeDetails = ({ departments }) => {
   const { employeeId } = useParams(); // Get the employee ID from the URL
-  console.log("=========employeeId=======>", employeeId);
+  //console.log("=========employeeId=======>", employeeId);
   
   const [employee, setEmployee] = useState(null);
 

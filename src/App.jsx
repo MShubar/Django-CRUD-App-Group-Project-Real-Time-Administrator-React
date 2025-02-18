@@ -25,6 +25,7 @@ import { BASE_URL } from './servers/config'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NotFound from './pages/NotFound'
 import CompanyProfile from './pages/home/CompanyProfile'
+import CompanyUpdateForm from './pages/home/CompanyUpdateForm'
 
 function App() {
   const [user, setUser] = useState()
@@ -218,7 +219,10 @@ function App() {
           />
         ) : null}
         {user ? (
-          <Route path="/editProfile" element={<CompanyProfile />} />
+          <Route path="/editProfile" element={<CompanyProfile user={user} />} />
+        ) : null}
+        {user ? (
+          <Route path="/editProfile/update/:id" element={<CompanyUpdateForm user={user} />} />
         ) : null}
         <Route path="*" element={<NotFound />} />
       </Routes>
