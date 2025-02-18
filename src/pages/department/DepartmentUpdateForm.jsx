@@ -54,9 +54,9 @@ const DepartmentUpdateForm = ({ departments, setDepartments }) => {
   }
 
   return (
-    <div>
+    <div className="signup-container">
       <h1>Update Department</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="signup-form">
         <label htmlFor="name">Department Name:</label>
         <input
           type="text"
@@ -74,8 +74,12 @@ const DepartmentUpdateForm = ({ departments, setDepartments }) => {
           onChange={handleChange}
         />
         <br />
+        <div className="d-flex justify-content-between mt-3">
 
         <button type="submit">Submit Update</button>
+        <button onClick={() => navigate('/departmentlist')}>Back</button>
+        
+        </div>
       </form>
     </div>
   )

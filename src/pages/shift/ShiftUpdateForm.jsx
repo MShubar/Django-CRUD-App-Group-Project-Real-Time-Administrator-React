@@ -62,9 +62,9 @@ const ShiftUpdateForm = () => {
   if (!shift) return <h2>Loading...</h2>
 
   return (
-    <div>
+    <div className="signup-container">
       <h1>Edit Shift</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="signup-form">
         <div>
           <label>Name</label>
           <input
@@ -92,9 +92,14 @@ const ShiftUpdateForm = () => {
             required
           />
         </div>
+
+        <div className="d-flex justify-content-between mt-3">
         <button type="submit" className="btn btn-primary">
           Update Shift
         </button>
+        <button onClick={() => navigate(`/shift/${id}`)}>Back</button>
+      </div>
+      
       </form>
     </div>
   )
