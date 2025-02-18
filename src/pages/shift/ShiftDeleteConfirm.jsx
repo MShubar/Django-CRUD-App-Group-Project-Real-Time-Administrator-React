@@ -26,7 +26,7 @@ const ShiftDeleteConfirm = () => {
   }
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Are you sure you want to delete this shift?</h2>
       <button onClick={() => navigate('/shifts')} className="btn btn-secondary">
         No

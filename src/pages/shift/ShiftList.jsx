@@ -64,9 +64,7 @@ const ShiftList = () => {
                       View Details
                     </Link>
 
-                    {/* <Link to={`/updateshift/${shift._id}`} className="btn btn-warning btn-sm">
-                      Edit
-                    </Link> */}
+                  
                   </td>
                 </tr>
               ))}
@@ -79,3 +77,47 @@ const ShiftList = () => {
 };
 
 export default ShiftList;
+
+// return (
+//   <div className="container my-4">
+//     <div className="d-flex justify-content-between align-items-center mb-4">
+//       <h1 className="text-primary">Shifts List</h1>
+//       <Link to="/newshift" className="btn btn-success">
+//         Create New Shift
+//       </Link>
+//     </div>
+
+//     {loading ? (
+//       <p>Loading...</p>
+//     ) : (
+//       <div className="row gy-3">
+//         {shifts.map((shift) => (
+//           <div className="col-12" key={shift._id}>
+//             <div className="card p-3">
+//               <div className="card-body">
+//                 <h5 className="card-title">{shift.name}</h5>
+//                 <p className="card-text">
+//                   <strong>Start Time:</strong> {shift.startTime}
+//                 </p>
+//                 <p className="card-text">
+//                   <strong>End Time:</strong> {shift.endTime}
+//                 </p>
+//                 <div className="d-flex justify-content-between">
+//                   <Link
+//                     to={`/shift/${shift._id}`}
+//                     className="btn btn-info btn-sm"
+//                   >
+//                     View Details
+//                   </Link>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     )}
+//   </div>
+// );
+// };
+
+// export default ShiftList;
