@@ -26,14 +26,19 @@ function Footer({ isAuthenticated, role, onLogout }) {
               Dashboard
             </NavLink>
           )}
-          {isAuthenticated && (
+          {isAuthenticated && role === 'company' && (
             <NavLink to="/departmentlist" className="column-text">
               Department List
             </NavLink>
           )}
-          {isAuthenticated && (
+          {isAuthenticated && role === 'company' && (
             <NavLink to="/shift" className="column-text">
               Shift List
+            </NavLink>
+          )}
+          {isAuthenticated && role === 'company' && (
+            <NavLink className="column-text" to="/employees">
+              Department
             </NavLink>
           )}
         </div>

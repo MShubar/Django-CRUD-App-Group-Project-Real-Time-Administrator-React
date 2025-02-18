@@ -30,7 +30,7 @@ function Profile() {
   }, [])
 
   return (
-    <div class="dropdown">
+    <div className="dropdown">
       <img
         className="ProfilePicture"
         src={company?.logoImage}
@@ -38,7 +38,9 @@ function Profile() {
         style={{ width: '50px', height: '50px', borderRadius: '50%' }}
       />
       <div className="dropdown-content">
-        <Link to="/editProfile">Edit</Link>
+        <Link className="MyProfile" to="/editProfile">
+          My Profile
+        </Link>
       </div>
     </div>
   )

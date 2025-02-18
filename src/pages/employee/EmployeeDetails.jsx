@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { BASE_URL } from '../../servers/config';
+import { useEffect, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { BASE_URL } from '../../servers/config'
 
 const EmployeeDetails = ({ departments }) => {
-  const { employeeId } = useParams(); // Get the employee ID from the URL
-  console.log("=========employeeId=======>", employeeId);
-  
-  const [employee, setEmployee] = useState(null);
+  const { employeeId } = useParams() // Get the employee ID from the URL
+  console.log('=========employeeId=======>', employeeId)
+
+  const [employee, setEmployee] = useState(null)
 
   useEffect(() => {
     const fetchEmployeeDetails = async () => {
@@ -17,27 +17,27 @@ const EmployeeDetails = ({ departments }) => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('token')}` // Include the token if needed
           }
-        });
-        
-        console.log("======response=========", response.ok);
+        })
+
+        console.log('======response=========', response.ok)
 
         if (!response.ok) {
-          throw new Error('Failed to fetch employee details');
+          throw new Error('Failed to fetch employee details')
         }
 
-        const employeeData = await response.json();
-        console.log("Fetched Employee Data:", employeeData);
-        setEmployee(employeeData);
+        const employeeData = await response.json()
+        console.log('Fetched Employee Data:', employeeData)
+        setEmployee(employeeData)
       } catch (error) {
-        console.error('Error fetching employee details:', error);
+        console.error('Error fetching employee details:', error)
       }
-    };
+    }
 
-    fetchEmployeeDetails();
-  }, [employeeId]);
+    fetchEmployeeDetails()
+  }, [employeeId])
 
   if (!employee) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -51,7 +51,9 @@ const EmployeeDetails = ({ departments }) => {
       </p>
       <p>
         <strong>Department:</strong>
-        {departments.find(department => department._id === employee.departmentId[0])?.name || 'Department Not Found'}
+        {departments.find(
+          (department) => department._id === employee.departmentId[0]
+        )?.name || 'Department Not Found'}
       </p>
       <p>
         <strong>Status:</strong> {employee.status}
@@ -72,7 +74,7 @@ const EmployeeDetails = ({ departments }) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EmployeeDetails;
+export default EmployeeDetails

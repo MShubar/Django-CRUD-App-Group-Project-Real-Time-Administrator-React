@@ -1,8 +1,14 @@
 import { useState } from 'react'
 import { BASE_URL } from '../../servers/config'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
-const EmployeeForm = ({ user, departments, employees, setEmployees , setShowForm}) => {
+const EmployeeForm = ({
+  user,
+  departments,
+  employees,
+  setEmployees,
+  setShowForm
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     position: '',
@@ -48,10 +54,10 @@ const EmployeeForm = ({ user, departments, employees, setEmployees , setShowForm
         throw new Error(`Failed to add employee: ${data.error}`)
       }
 
-      setEmployees([...employees, data.employee]) 
+      setEmployees([...employees, data.employee])
       setShowForm((prev) => !prev)
-     console.log('New Employee Added:', data)
-      navigate("/employees");
+      console.log('New Employee Added:', data)
+      navigate('/employees')
     } catch (error) {
       console.error('Error adding employee:', error)
     }
