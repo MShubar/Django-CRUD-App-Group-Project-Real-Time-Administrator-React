@@ -1,53 +1,147 @@
-/* Signup Form Styles */
-.signup-container {
-  max-width: 400px;
-  margin: auto;
+/* Full-page Centering */
+.SignupPage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   padding: 20px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
 
-.signup-container h2 {
-  margin-bottom: 20px;
-  color: #333;
+/* Sign-in Form Container */
+.SignupForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  min-height: 500px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  gap: 1%;
 }
 
-.signup-form {
+/* Adds a slight hover effect */
+.SignupForm:hover {
+  transform: scale(1.02);
+}
+
+/* Left Panel - Form */
+.SignupBorders {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  max-width: 600px;
+  padding: 50px;
+  height: 850px;
+  min-height: 500px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.signup-form input {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+/* Sign-in Form Fields */
+.SignupFormClass {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
-.signup-form input[type='file'] {
-  padding: 5px;
-}
-
-.signup-form label {
-  text-align: left;
-  font-weight: bold;
-  margin: 5px 0;
-}
-
-.signup-form button {
-  background: #007bff;
-  color: white;
-  padding: 10px;
+.SignupFormClass input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+  /* background: rgba(255, 255, 255, 0.3); */
+  color: white;
+  text-align: center;
+  outline: none;
+  transition: 0.3s ease;
 }
 
-.signup-form button:hover {
-  background: #0056b3;
+/* Submit Button */
+.SignupFormClass button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: bold;
+}
+
+.SignupFormClass button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Right Panel - Text */
+.SignupText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  max-width: 400px;
+  border-radius: 20px;
+  height: 106vh;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Media Query for Phones */
+@media (max-width: 768px) {
+  /* Full-page Centering */
+  .SignupPage {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  /* Sign-up Form Container */
+  .SignupForm {
+    flex-direction: column; /* Change from row to column for better mobile view */
+    min-height: auto; /* Adjust height */
+    gap: 20px; /* Increase gap between panels */
+  }
+
+  /* Left Panel - Form */
+  .SignupBorders {
+    max-width: 100%; /* Full width on small screens */
+    padding: 20px; /* Adjust padding */
+    height: auto; /* Adjust height */
+  }
+
+  /* Sign-up Form Fields */
+  .SignupFormClass input {
+    font-size: 14px; /* Adjust font size for smaller screens */
+    padding: 10px; /* Reduce padding */
+  }
+
+  /* Submit Button */
+  .SignupFormClass button {
+    font-size: 16px; /* Adjust font size */
+    padding: 10px; /* Reduce padding */
+  }
+
+  /* Right Panel - Text */
+  .SignupText {
+    max-width: 100%; /* Full width on smaller screens */
+    height: auto; /* Adjust height */
+    padding: 20px; /* Adjust padding */
+    font-size: 16px; /* Adjust font size */
+  }
 }

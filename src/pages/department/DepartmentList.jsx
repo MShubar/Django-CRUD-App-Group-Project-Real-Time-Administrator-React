@@ -30,22 +30,31 @@ const DepartmentList = () => {
     fetchDepartments();
   }, []);
 
-  return (
-    <div>
-      <h2>Departments List</h2>
-      <Link to="/newdepartment">Create New Department</Link>
-      <div className="department-list">
+return (
+  <div className="container my-4"> 
+    <div className="d-flex justify-content-between align-items-center mb-4"> 
+      <h1 className="text-primary">Departments List</h1>
+      <Link to="/newdepartment" className="btn btn-success"> 
+        Create New Department
+      </Link>
+    </div>
+
+    <section className="department-list">
+      <div className="row gy-3"> 
         {departments.map((department) => (
-          <Link key={department._id} to={`/departments/${department._id}`}>
-          <div className="department-item">
-            <h5>{department.name}</h5>
-            <p>{department.description}</p>
+          <div className="col-12" key={department._id}> 
+            <Link to={`/departments/${department._id}`} className="text-decoration-none"> 
+              <div className="card p-3 border">
+                <h5 className="card-title">{department.name}</h5>
+                <p className="card-text">{department.description}</p>
+              </div>
+            </Link>
           </div>
-        </Link>        
         ))}
       </div>
-    </div>
-  );
+    </section>
+  </div>
+);
 };
 
 export default DepartmentList;

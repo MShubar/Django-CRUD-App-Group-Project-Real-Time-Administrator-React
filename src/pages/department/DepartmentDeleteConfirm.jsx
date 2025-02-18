@@ -33,7 +33,7 @@ const DepartmentDeleteConfirm = ({ departments, setDepartments }) => {
   }
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>
         Are you sure you want to delete this department?
         <br />

@@ -19,6 +19,14 @@ function RTABrief() {
 
   return (
     <section className="rta-brief">
+      <motion.h2
+        className="services-heading text-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        Real Time Administrator
+      </motion.h2>
       <section className="borders">
         <motion.div
           className="border-text"

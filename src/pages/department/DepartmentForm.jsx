@@ -42,33 +42,39 @@ const DepartmentForm = ({ departments, setDepartments }) => {
     setFormValues({ ...formValues, [event.target.id]: event.target.value })
   }
 
-  return (
-    <div className="signup-container">
+return (
+  <div className="signup-container">
+    <form onSubmit={handleSubmit} className="signup-form">
       <h2>Create a Department</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Department Name:</label>
+
+      <div className="mb-3">
+        <label htmlFor="name" className="form-label">Department Name:</label>
         <input
           type="text"
           id="name"
+          className="form-control border border-success rounded-3 shadow-sm"
           value={formValues.name}
           onChange={handleChange}
           required
         />
-        <br />
+      </div>
 
-        <label htmlFor="description">Description:</label>
+      <div className="mb-3">
+        <label htmlFor="description" className="form-label">Description:</label>
         <input
           type="text"
           id="description"
+          className="form-control border border-success rounded-3 shadow-sm"
           value={formValues.description}
           onChange={handleChange}
+          required
         />
-        <br />
+      </div>
 
-        <button type="submit">Create Department</button>
-      </form>
-    </div>
-  )
+      <button type="submit" className="btn btn-primary btn-lg w-100">Create Department</button>
+    </form>
+  </div>
+)
 }
 
 export default DepartmentForm

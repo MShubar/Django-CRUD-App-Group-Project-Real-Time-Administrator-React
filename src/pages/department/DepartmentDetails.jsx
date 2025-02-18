@@ -54,44 +54,90 @@ const DepartmentDetails = () => {
     }
   }
 
-  return (
-    <div>
-      {department ? (
-        <>
-          <h1>Department Details</h1>
+//   return (
+//     <div>
+//       {department ? (
+//         <>
+//           <h1>Department Details</h1>
+//           <section className="department-details">
+//             <h2>{department.name}</h2>
+//             <p>
+//               <strong>Description:</strong> {department.description}
+//             </p>
+
+//             <Link
+//               className="btn btn-primary btn-sm mb-2"
+//               to={`/updatedepartment/${department._id}`}
+//             >
+//               Update
+//             </Link>
+
+//             <Link
+//               className="btn btn-danger btn-sm mb-2"
+//               to={`/deletedepartment/${department._id}`}
+//             >
+//               Delete
+//             </Link>
+
+//             <button
+//               className="btn btn-secondary btn-sm mb-2"
+//               onClick={() => navigate('/departmentlist')}
+//             >
+//               Back
+//             </button>
+//           </section>
+//         </>
+//       ) : (
+//         <h1>Loading...</h1>
+//       )}
+//     </div>
+//   )
+// }
+
+// export default DepartmentDetails
+
+return (
+  <div className="container my-4"> 
+    {department ? (
+      <div className="card shadow-sm"> 
+        <div className="card-body">
+          <h1 className="card-title text-primary">Department Details</h1> 
           <section className="department-details">
             <h2>{department.name}</h2>
             <p>
               <strong>Description:</strong> {department.description}
             </p>
 
-            <Link
-              className="btn btn-primary btn-sm mb-2"
-              to={`/updatedepartment/${department._id}`}
-            >
-              Update
-            </Link>
+            <div className="d-flex justify-content-between mt-3"> 
+              <Link
+                className="btn btn-primary btn-sm"
+                to={`/updatedepartment/${department._id}`}
+              >
+                Update
+              </Link>
 
-            <Link
-              className="btn btn-danger btn-sm mb-2"
-              to={`/deletedepartment/${department._id}`}
-            >
-              Delete
-            </Link>
+              <Link
+                className="btn btn-danger btn-sm"
+                to={`/deletedepartment/${department._id}`}
+              >
+                Delete
+              </Link>
+            </div>
 
             <button
-              className="btn btn-secondary btn-sm mb-2"
+              className="btn btn-secondary btn-sm mt-3"
               onClick={() => navigate('/departmentlist')}
             >
               Back
             </button>
           </section>
-        </>
-      ) : (
-        <h1>Loading...</h1>
-      )}
-    </div>
-  )
-}
+        </div>
+      </div>
+    ) : (
+      <h1>Loading...</h1>
+    )}
+  </div>
+);
+};
 
-export default DepartmentDetails
+export default DepartmentDetails;
