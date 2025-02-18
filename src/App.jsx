@@ -32,52 +32,6 @@ function App() {
   const [departments, setDepartments] = useState([])
   const [employees, setEmployees] = useState([])
   const [shifts, setShifts] = useState([])
-  const fetchDepartments = async () => {
-    const token = localStorage.getItem('token')
-    try {
-      const response = await fetch(`${BASE_URL}/department`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
-      if (!response.ok) {
-        throw new Error('Failed to fetch departments')
-      }
-
-      const departmentData = await response.json()
-      setDepartments(departmentData)
-    } catch (error) {
-      console.error('Error fetching departments:', error)
-    }
-  }
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchDepartments()
-    }
-  }, [isAuthenticated])
-
-  const getShifts = async () => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      try {
-        const response = await fetch(`${BASE_URL}/shift`, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        const data = await response.json()
-        setShifts(data)
-      } catch (error) {
-        console.error('Error fetching shifts:', error)
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      getShifts()
-    }
-  }, [isAuthenticated])
 
   const handleLogin = () => {
     setIsAuthenticated(true)
@@ -104,7 +58,14 @@ function App() {
           }
         />
         <Route path="/signup" element={<Signup />} />
-        {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}
+        {user ? (
+          <Route
+            path="/dashboard"
+            element={
+              <Dashboard isAuthenticated={isAuthenticated} role={user?.role} />
+            }
+          />
+        ) : null}
         {user ? (
           <>
             <Route path="/departmentlist" element={<DepartmentList />} />
