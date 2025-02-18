@@ -9,8 +9,8 @@ const CompanyDeleteConfirm = () => {
     console.log('Delete button clicked')
     const token = localStorage.getItem('token')
     try {
-      const response = await fetch(`${BASE_URL}/companies/check/${id}`, {
-        method: 'GET',
+      const response = await fetch(`${BASE_URL}/companies/delete/${id}`, {
+        method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
