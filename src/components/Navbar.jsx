@@ -26,11 +26,15 @@ function Navbar({ isAuthenticated, role, onLogout }) {
           {isAuthenticated && <NavLink to="/dashboard">Dashboard</NavLink>}
 
           {/* Company can see everything */}
-          {role === 'company' && (
+          {isAuthenticated && role === 'company' && (
             <NavLink to="/departmentlist">Department</NavLink>
           )}
-          {role === 'company' && <NavLink to="/shift">Shift</NavLink>}
-          {role === 'company' && <NavLink to="/employees">Employee</NavLink>}
+          {isAuthenticated && role === 'company' && (
+            <NavLink to="/shift">Shift</NavLink>
+          )}
+          {isAuthenticated && role === 'company' && (
+            <NavLink to="/employees">Employee</NavLink>
+          )}
         </div>
 
         <div className="reg-btn">
@@ -52,28 +56,6 @@ function Navbar({ isAuthenticated, role, onLogout }) {
           )}
         </div>
       </section>
-
-      <nav className="bottom-nav">
-        <NavLink to="/" className="logo">
-          RTA
-        </NavLink>
-
-        {!isAuthenticated ? (
-          <>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/signin" className="signin">
-              Sign In
-            </NavLink>
-            <NavLink to="/signup" className="signup">
-              Sign Up
-            </NavLink>
-          </>
-        ) : (
-          <NavLink to="/" onClick={handleClick} className="signup">
-            Log out
-          </NavLink>
-        )}
-      </nav>
     </>
   )
 }

@@ -16,3 +16,7 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.MyProfile {
+  text-decoration: none;
+}

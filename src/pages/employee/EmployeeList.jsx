@@ -8,7 +8,7 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
 
   const [showForm, setShowForm] = useState(false)
   const [selectedEmployee, setSelectedEmployee] = useState(null)
-const getAllEmployees = async () => {
+  const getAllEmployees = async () => {
     const token = localStorage.getItem('token')
     //console.log("Token:", token);
     if (token) {
@@ -42,10 +42,8 @@ const getAllEmployees = async () => {
   const handleCloseDetails = () => {
     setSelectedEmployee(null)
   }
-useEffect(() => {
-    
-      getAllEmployees()
-   
+  useEffect(() => {
+    getAllEmployees()
   }, [])
   return (
     <div className="container my-4">
@@ -71,18 +69,13 @@ useEffect(() => {
       <section className="employee-list">
         <div className="row gy-3">
           {employees.map((employee) => (
-            <div
-              className="col-12"
-              key={employee._id}
-              
-            >
+            <div className="col-12" key={employee._id}>
               <Employee employee={employee} departments={departments} />
             </div>
           ))}
         </div>
       </section>
-
-      </div>
+    </div>
   )
 }
 

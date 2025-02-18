@@ -5,7 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { BASE_URL } from '../../servers/config'
 import '../../styles/home/Dashboard.css'
 
-const Dashboard = () => {
+const Dashboard = ({ isAuthenticated, role }) => {
   const [events, setEvents] = useState([])
   const [resources, setResources] = useState([])
   const [shifts, setShifts] = useState([])
@@ -14,29 +14,49 @@ const Dashboard = () => {
   const [selectedShift, setSelectedShift] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [selectedEvent, setSelectedEvent] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token')
-
-        // Fetch Employees
-        const employeeResponse = await fetch(`${BASE_URL}/employees`, {
+        const userResponse = await fetch(`${BASE_URL}/users/profile`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
           }
         })
-        if (!employeeResponse.ok) throw new Error('Failed to fetch employees')
-        const employees = await employeeResponse.json()
-        const formattedResources = employees.map((employee) => ({
-          id: employee._id,
-          title: employee.name
-        }))
-        setResources(formattedResources)
+        const user = await userResponse.json()
+        try {
+          const response = await fetch(`${BASE_URL}/employees`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            }
+          })
 
-        // Fetch Shifts
+          if (!response.ok) {
+            throw new Error(
+              `Failed to fetch employees: ${response.status} ${response.statusText}`
+            )
+          }
+
+          const data = await response.json()
+          if (!Array.isArray(data) || data.length === 0) {
+            console.warn('No employees found or API returned an empty array.')
+          }
+
+          const formattedResources = data.map((employee) => ({
+            id: employee._id,
+            title: employee.name
+          }))
+          setResources(formattedResources)
+        } catch (error) {
+          console.error('Error fetching employees:', error)
+        }
+
         const shiftResponse = await fetch(`${BASE_URL}/shift`, {
           method: 'GET',
           headers: {
@@ -44,11 +64,9 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        if (!shiftResponse.ok) throw new Error('Failed to fetch shifts')
         const availableShifts = await shiftResponse.json()
         setShifts(availableShifts)
 
-        // Fetch Employee Shifts
         const shiftDataResponse = await fetch(`${BASE_URL}/employeeshifts`, {
           method: 'GET',
           headers: {
@@ -56,35 +74,21 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`
           }
         })
-
         if (!shiftDataResponse.ok)
           throw new Error('Failed to fetch employee shifts')
         const shiftsData = await shiftDataResponse.json()
-
-        const formattedEvents = shiftsData
-          .filter((shift) => {
-            const loggedInEmployeeId = localStorage.getItem('employeeId') // Assuming the employee ID is stored in localStorage
-            // If the logged-in user is an employee, show only their shifts
-            return loggedInEmployeeId
-              ? shift.employeeId === loggedInEmployeeId
-              : true
-          })
-          .map((shift) => {
-            const employee = resources.find(
-              (res) => res.id === shift.employeeId
-            )
-
-            return {
-              id: shift._id,
-              resourceId: shift.employeeId,
-              title: shift.shiftId.name,
-              start: new Date(shift.startDate).toISOString(),
-              end: new Date(shift.endDate).toISOString(),
-              backgroundColor: '#28a745',
-              borderColor: '#28a745',
-              extendedProps: { ...shift }
-            }
-          })
+        const formattedEvents = shiftsData.map((shift) => {
+          return {
+            id: shift._id,
+            resourceId: shift.employeeId,
+            title: shift.shiftId?.name || 'Unknown Shift',
+            start: new Date(shift.startDate).toISOString(),
+            end: new Date(shift.endDate).toISOString(),
+            backgroundColor: '#28a745',
+            borderColor: '#28a745',
+            extendedProps: { ...shift }
+          }
+        })
 
         setEvents(formattedEvents)
       } catch (error) {
@@ -93,7 +97,35 @@ const Dashboard = () => {
     }
 
     fetchData()
-  }, []) // Re-fetch data when resources change
+  }, [])
+
+  const handleDeleteShift = async () => {
+    const token = localStorage.getItem('token')
+    if (!selectedEvent) return
+
+    const eventId = selectedEvent.id
+
+    try {
+      const response = await fetch(`${BASE_URL}/employeeshifts/${eventId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      if (!response.ok) throw new Error('Failed to delete shift')
+
+      setEvents((prevEvents) =>
+        prevEvents.filter((event) => event.id !== eventId)
+      )
+
+      setIsFormOpen(false)
+      setSelectedEvent(null)
+    } catch (error) {
+      console.error('Error deleting shift:', error)
+    }
+  }
 
   const handleSubmitShift = async () => {
     const token = localStorage.getItem('token')
@@ -118,7 +150,7 @@ const Dashboard = () => {
 
       setIsFormOpen(false)
       const newEvent = {
-        id: response.id, // You'll likely get the new event's ID from the response
+        id: response.id,
         resourceId: selectedEmployee,
         title: selectedShift,
         start: new Date(startDate).toISOString(),
@@ -129,7 +161,7 @@ const Dashboard = () => {
       }
 
       setEvents((prevEvents) => [...prevEvents, newEvent])
-      fetchData() // Re-fetch data to update the calendar after adding shift
+      fetchData()
     } catch (error) {
       console.error('Error creating shift:', error)
     }
@@ -158,9 +190,7 @@ const Dashboard = () => {
 
       if (!response.ok) throw new Error('Failed to update shift')
 
-      const updatedEvent = await response.json() // Capture the updated event
-
-      // Update the event list
+      const updatedEvent = await response.json()
       setEvents((prevEvents) =>
         prevEvents.map((event) =>
           event.id === updatedEvent._id
@@ -179,6 +209,11 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+      {isAuthenticated && role === 'company' && selectedEvent && (
+        <button onClick={handleDeleteShift} className="toggle-form-btn">
+          Delete Shift
+        </button>
+      )}
       <h2 className="text-xl font-bold mb-4 TextChange">Schedule Dashboard</h2>
       <FullCalendar
         plugins={[resourceTimelinePlugin, interactionPlugin]}
@@ -214,6 +249,9 @@ const Dashboard = () => {
         eventContent={(arg) => {
           return { html: `<b>${arg.event.title}</b>` }
         }}
+        eventClick={(info) => {
+          setSelectedEvent(info.event)
+        }}
         editable={true}
         height="auto"
         selectable={true}
@@ -223,15 +261,16 @@ const Dashboard = () => {
           info.el.classList.add('TextChange')
         }}
       />
-      <div className="header">
-        <button
-          className="toggle-form-btn"
-          onClick={() => setIsFormOpen(!isFormOpen)}
-        >
-          {isFormOpen ? 'Close Form' : 'Add Employee Shift'}
-        </button>
-      </div>
-
+      {isAuthenticated && role === 'company' && (
+        <div className="header">
+          <button
+            className="toggle-form-btn"
+            onClick={() => setIsFormOpen(!isFormOpen)}
+          >
+            {isFormOpen ? 'Close Form' : 'Add Employee Shift'}
+          </button>
+        </div>
+      )}
       {isFormOpen && (
         <div className="form-container">
           <form>

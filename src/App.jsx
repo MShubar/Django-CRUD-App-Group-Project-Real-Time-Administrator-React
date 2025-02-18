@@ -21,7 +21,6 @@ import EmployeeDetails from './pages/employee/EmployeeDetails'
 import EmployeeUpdateForm from './pages/employee/EmployeeUpdateForm'
 import DeleteEmployee from './pages/employee/DeleteEmployee'
 import { useState, useEffect } from 'react'
-import { BASE_URL } from './servers/config'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NotFound from './pages/NotFound'
 import CompanyProfile from './pages/home/CompanyProfile'
@@ -32,7 +31,7 @@ function App() {
   const [departments, setDepartments] = useState([])
   const [employees, setEmployees] = useState([])
   const [shifts, setShifts] = useState([])
-  
+
   const handleLogin = () => {
     setIsAuthenticated(true)
   }
@@ -58,7 +57,14 @@ function App() {
           }
         />
         <Route path="/signup" element={<Signup />} />
-        {user ? <Route path="/dashboard" element={<Dashboard />} /> : null}
+        {user ? (
+          <Route
+            path="/dashboard"
+            element={
+              <Dashboard isAuthenticated={isAuthenticated} role={user?.role} />
+            }
+          />
+        ) : null}
         {user ? (
           <>
             <Route path="/departmentlist" element={<DepartmentList />} />
@@ -130,13 +136,18 @@ function App() {
                 setEmployees={setEmployees}
               />
             }
-            
           />
         ) : null}
         {user ? (
           <Route
             path="/employees/:employeeId"
-            element={<EmployeeDetails employees={employees} user={user}  departments={departments}/>}
+            element={
+              <EmployeeDetails
+                employees={employees}
+                user={user}
+                departments={departments}
+              />
+            }
           />
         ) : null}
         {user ? (
@@ -144,19 +155,25 @@ function App() {
             path="/employees/new"
             element={
               <EmployeeForm
-              user={user}
+                user={user}
                 departments={departments}
-                
                 setEmployees={setEmployees}
               />
             }
           />
         ) : null}
-        
+
         {user ? (
           <Route
             path="/employees/update/:id"
-            element={<EmployeeUpdateForm employees={employees} user={user} departments={departments} setEmployees={setEmployees}/>}
+            element={
+              <EmployeeUpdateForm
+                employees={employees}
+                user={user}
+                departments={departments}
+                setEmployees={setEmployees}
+              />
+            }
           />
         ) : null}
         {user ? (
