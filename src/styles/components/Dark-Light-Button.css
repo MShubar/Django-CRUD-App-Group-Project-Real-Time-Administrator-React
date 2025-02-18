@@ -173,7 +173,7 @@ body {
 }
 
 .cloud1 {
-  position: absolute;
+  position: fixed;
   transform: scale(0.4);
   padding: 10px;
   z-index: -2;
@@ -184,7 +184,7 @@ body {
 }
 
 .cloud2 {
-  position: absolute;
+  position: fixed;
   transform: scale(0.6);
   padding: 10px;
   top: 80px;
@@ -195,18 +195,17 @@ body {
 }
 @media (max-width: 768px) {
   .cloud1 {
-    transform: scale(0.3); /* Smaller scale for mobile */
-    left: 50px; /* Start from the left side */
-    top: 30px; /* Adjust the vertical position */
+    transform: scale(0.3);
+    left: 50px;
+    top: 30px;
   }
 
   .cloud2 {
-    transform: scale(0.4); /* Smaller scale for mobile */
-    left: 190px; /* Start from the left side */
-    top: -180px; /* Adjust the vertical position */
+    transform: scale(0.4);
+    left: 190px;
+    top: -180px;
   }
 }
-/* Base and cloud shapes remain unchanged */
 .base1 {
   position: relative;
   top: 180px;
