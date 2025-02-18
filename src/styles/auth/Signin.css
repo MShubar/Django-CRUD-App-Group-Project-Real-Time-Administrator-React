@@ -110,3 +110,45 @@
   font-size: 18px;
   font-weight: 500;
 }
+/* Media Query for Phones */
+@media (max-width: 768px) {
+  /* Full-page Centering */
+  .page {
+    padding: 10px; /* Adjusting padding for smaller screens */
+  }
+
+  /* Sign-in Form Container */
+  .SigninForm {
+    flex-direction: column; /* Change from row to column for better mobile view */
+    min-height: auto; /* Adjust height */
+    width: 300px;
+    gap: 20px; /* Increase gap between panels */
+  }
+
+  /* Left Panel - Form */
+  .SigninBorders {
+    max-width: 100%; /* Full width on small screens */
+    padding: 20px; /* Adjust padding */
+    min-height: auto; /* Adjust height */
+  }
+
+  /* Sign-in Form Fields */
+  .formClass input {
+    font-size: 14px; /* Adjust font size for smaller screens */
+    padding: 10px; /* Reduce padding */
+  }
+
+  /* Submit Button */
+  .formClass button {
+    font-size: 16px; /* Adjust font size */
+    padding: 10px; /* Reduce padding */
+  }
+
+  /* Right Panel - Text */
+  .text {
+    max-width: 100%; /* Full width on smaller screens */
+    height: auto; /* Adjust height */
+    padding: 20px; /* Adjust padding */
+    font-size: 16px; /* Adjust font size */
+  }
+}

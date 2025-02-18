@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { BASE_URL } from '../../servers/config'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../../styles/employees/employeeDetails.css'
 const EmployeeDetails = ({ departments }) => {
   const { employeeId } = useParams() // Get the employee ID from the URL
   console.log('=========employeeId=======>', employeeId)

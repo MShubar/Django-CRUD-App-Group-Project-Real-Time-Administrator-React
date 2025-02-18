@@ -34,7 +34,6 @@ function Signup() {
     setError(null)
     setLoading(true)
 
-    // Basic validation
     if (
       !formData.name ||
       !formData.address ||
