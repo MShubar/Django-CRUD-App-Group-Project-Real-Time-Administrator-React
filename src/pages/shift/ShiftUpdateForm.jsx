@@ -62,45 +62,46 @@ const ShiftUpdateForm = () => {
   if (!shift) return <h2>Loading...</h2>
 
   return (
-    <div className="signup-container">
-      <h1>Edit Shift</h1>
-      <form onSubmit={handleSubmit} className="signup-form">
-        <div>
-          <label>Name</label>
-          <input
-            type="text"
-            value={shift.name}
-            onChange={(e) => setShift({ ...shift, name: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <label>Start Time</label>
-          <input
-            type="time"
-            value={shift.startTime}
-            onChange={(e) => setShift({ ...shift, startTime: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <label>End Time</label>
-          <input
-            type="time"
-            value={shift.endTime}
-            onChange={(e) => setShift({ ...shift, endTime: e.target.value })}
-            required
-          />
-        </div>
+    <div className="page">
+      <div className="SigninForm">
+        <div className="SigninBorders">
+          <h1>Edit Shift</h1>
+          <form onSubmit={handleSubmit} className="signup-form">
+            <label>Name</label>
+            <input
+              type="text"
+              value={shift.name}
+              onChange={(e) => setShift({ ...shift, name: e.target.value })}
+              required
+            />
 
-        <div className="d-flex justify-content-between mt-3">
-        <button type="submit" className="btn btn-primary">
-          Update Shift
-        </button>
-        <button onClick={() => navigate(`/shift/${id}`)}>Back</button>
+            <label>Start Time</label>
+            <input
+              type="time"
+              value={shift.startTime}
+              onChange={(e) =>
+                setShift({ ...shift, startTime: e.target.value })
+              }
+              required
+            />
+
+            <label>End Time</label>
+            <input
+              type="time"
+              value={shift.endTime}
+              onChange={(e) => setShift({ ...shift, endTime: e.target.value })}
+              required
+            />
+
+            <div className="d-flex justify-content-between mt-3">
+              <button type="submit" className="btn btn-primary">
+                Update Shift
+              </button>
+              <button onClick={() => navigate(`/shift/${id}`)}>Back</button>
+            </div>
+          </form>
+        </div>
       </div>
-      
-      </form>
     </div>
   )
 }

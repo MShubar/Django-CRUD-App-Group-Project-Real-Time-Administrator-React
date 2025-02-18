@@ -20,9 +20,9 @@ const DepartmentForm = ({ departments, setDepartments }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(formValues) 
+        body: JSON.stringify(formValues)
       })
 
       if (!response.ok) {
@@ -30,9 +30,9 @@ const DepartmentForm = ({ departments, setDepartments }) => {
       }
 
       const data = await response.json()
-      setDepartments([...departments, data]) 
-      setFormValues(initialState) 
-      navigate('/departmentlist') 
+      setDepartments([...departments, data])
+      setFormValues(initialState)
+      navigate('/departmentlist')
     } catch (error) {
       console.error('Error adding department:', error)
     }
@@ -42,39 +42,45 @@ const DepartmentForm = ({ departments, setDepartments }) => {
     setFormValues({ ...formValues, [event.target.id]: event.target.value })
   }
 
-return (
-  <div className="signup-container">
-    <form onSubmit={handleSubmit} className="signup-form">
-      <h2>Create a Department</h2>
+  return (
+    <div className="page">
+      <div className="SigninForm">
+        <div className="SigninBorders">
+          <form onSubmit={handleSubmit} className="signup-form">
+            <h2>Create a Department</h2>
 
-      <div className="mb-3">
-        <label htmlFor="name" className="form-label">Department Name:</label>
-        <input
-          type="text"
-          id="name"
-          className="form-control border border-success rounded-3 shadow-sm"
-          value={formValues.name}
-          onChange={handleChange}
-          required
-        />
+            <label htmlFor="name" className="form-label">
+              Department Name:
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="form-control border border-success rounded-3 shadow-sm"
+              value={formValues.name}
+              onChange={handleChange}
+              required
+            />
+
+            <label htmlFor="description" className="form-label">
+              Description:
+            </label>
+            <input
+              type="text"
+              id="description"
+              className="form-control border border-success rounded-3 shadow-sm"
+              value={formValues.description}
+              onChange={handleChange}
+              required
+            />
+
+            <button type="submit" className="btn btn-primary btn-lg w-100">
+              Create Department
+            </button>
+          </form>
+        </div>
       </div>
-
-      <div className="mb-3">
-        <label htmlFor="description" className="form-label">Description:</label>
-        <input
-          type="text"
-          id="description"
-          className="form-control border border-success rounded-3 shadow-sm"
-          value={formValues.description}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <button type="submit" className="btn btn-primary btn-lg w-100">Create Department</button>
-    </form>
-  </div>
-)
+    </div>
+  )
 }
 
 export default DepartmentForm
