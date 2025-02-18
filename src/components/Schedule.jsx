@@ -95,9 +95,9 @@ const ShiftSchedule = () => {
   return (
     <motion.div
       className="p-4"
-      initial={{ opacity: 0 }} // Initial state for animation
-      animate={{ opacity: 1 }} // Animate to full opacity
-      transition={{ duration: 0.5 }} // Duration of the animation
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
     >
       <h2 className="text-xl font-bold mb-4 TextChange">Schedule Dashboard</h2>
       <motion.div
