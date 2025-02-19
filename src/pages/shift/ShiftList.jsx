@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../servers/config'; 
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { BASE_URL } from '../../servers/config'
 
 const ShiftList = () => {
-  const [shifts, setShifts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [shifts, setShifts] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchShifts = async () => {
@@ -12,35 +12,36 @@ const ShiftList = () => {
         const response = await fetch(`${BASE_URL}/shift`, {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-          },
-        });
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        })
 
         if (!response.ok) {
-          throw new Error('Failed to fetch shifts');
+          throw new Error('Failed to fetch shifts')
         }
 
-        const data = await response.json();
-        setShifts(data);
+        const data = await response.json()
+        setShifts(data)
       } catch (error) {
-        console.error('Error fetching shifts:', error);
+        console.error('Error fetching shifts:', error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchShifts();
-  }, []);
+    fetchShifts()
+  }, [])
 
   return (
-    <div>
-      <h1>Shifts List</h1>
-      <div className="shift-list">
-        <Link to="/newshift" className="btn btn-primary mb-2">
+    <div className="container my-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 style={{ color: 'white' }}>Shifts List</h1>
+        <Link to="/newshift" className="createButton">
           Create New Shift
         </Link>
-
+      </div>
+      <div className="shift-list">
         {loading ? (
           <p>Loading...</p>
         ) : (
@@ -60,11 +61,12 @@ const ShiftList = () => {
                   <td>{shift.startTime}</td>
                   <td>{shift.endTime}</td>
                   <td>
-                    <Link to={`/shift/${shift._id}`} className="btn btn-info btn-sm mr-2">
+                    <Link
+                      to={`/shift/${shift._id}`}
+                      className="btn btn-info btn-sm mr-2"
+                    >
                       View Details
                     </Link>
-
-                  
                   </td>
                 </tr>
               ))}
@@ -73,10 +75,10 @@ const ShiftList = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ShiftList;
+export default ShiftList
 
 // return (
 //   <div className="container my-4">

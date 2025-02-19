@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { BASE_URL } from '../../servers/config';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { BASE_URL } from '../../servers/config'
+import { useParams, useNavigate } from 'react-router-dom'
 const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
   //console.log("==============user===========",user);
-  
-  const { id } = useParams();
+
+  const { id } = useParams()
   const [formData, setFormData] = useState({
     name: '',
     position: '',
@@ -13,23 +13,23 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
     image: null,
     email: '',
     password: ''
-  });
+  })
   const navigate = useNavigate()
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Check if formData is populated correctly
-    console.log('Current formData:', formData);
+    e.preventDefault()
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('position', formData.position);
-    formDataToSend.append('image', formData.image);
-    formDataToSend.append('companyId', user._id);
-    formDataToSend.append('departmentId', formData.departmentId);
-    formDataToSend.append('status', formData.status);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('password', formData.password);
+    // Check if formData is populated correctly
+    console.log('Current formData:', formData)
+
+    const formDataToSend = new FormData()
+    formDataToSend.append('name', formData.name)
+    formDataToSend.append('position', formData.position)
+    formDataToSend.append('image', formData.image)
+    formDataToSend.append('companyId', user._id)
+    formDataToSend.append('departmentId', formData.departmentId)
+    formDataToSend.append('status', formData.status)
+    formDataToSend.append('email', formData.email)
+    formDataToSend.append('password', formData.password)
 
     // Log FormData contents
     //console.log('Submitting new employee:==========>>');
@@ -40,60 +40,62 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
     try {
       const response = await fetch(`${BASE_URL}/employees/${id}`, {
         method: 'PUT',
-        body: formDataToSend,
-    });
-        if (!response.ok) {
-          throw new Error('Failed to update employee');
-        }
-        const updatedEmployeeData = await response.json(); // Get the updated data from the response
-        // Update the employees state
-        setEmployees(prevEmployees => 
-          prevEmployees.map(employee => 
-            employee._id === updatedEmployeeData._id ? updatedEmployeeData : employee
-          )
-        );
-        console.log('Updated Employee:', updatedEmployeeData);
-        
-        navigate(`/employees/${id}`);
+        body: formDataToSend
+      })
+      if (!response.ok) {
+        throw new Error('Failed to update employee')
+      }
+      const updatedEmployeeData = await response.json() // Get the updated data from the response
+      // Update the employees state
+      setEmployees((prevEmployees) =>
+        prevEmployees.map((employee) =>
+          employee._id === updatedEmployeeData._id
+            ? updatedEmployeeData
+            : employee
+        )
+      )
+      console.log('Updated Employee:', updatedEmployeeData)
+
+      navigate(`/employees/${id}`)
     } catch (error) {
-      console.error('Error adding employee:', error);
+      console.error('Error adding employee:', error)
     }
-  };
+  }
   useEffect(() => {
-        const fetchEmployeeDetails = async () => {
-          try {
-            const response = await fetch(`${BASE_URL}/employees/${id}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-              },
-            });
-    
-            if (!response.ok) {
-              throw new Error('Failed to fetch employee details');
-            }
-    
-            const employeeData = await response.json();
-            setFormData(employeeData);
-            
-            // Do not set password initially for security reasons
-          } catch (error) {
-            console.error('Error fetching employee details:', error);
+    const fetchEmployeeDetails = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/employees/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`
           }
-        };
-    
-        fetchEmployeeDetails();
-      }, [id]);
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch employee details')
+        }
+
+        const employeeData = await response.json()
+        setFormData(employeeData)
+
+        // Do not set password initially for security reasons
+      } catch (error) {
+        console.error('Error fetching employee details:', error)
+      }
+    }
+
+    fetchEmployeeDetails()
+  }, [id])
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    setFormData(prev => ({ ...prev, [name]: files[0] }));
-  };
+    const { name, files } = e.target
+    setFormData((prev) => ({ ...prev, [name]: files[0] }))
+  }
 
   return (
     <div className="signup-container">
@@ -121,7 +123,6 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
           name="image"
           accept="image/*"
           onChange={handleFileChange}
-          
         />
         <select
           id="departmentId"
@@ -132,7 +133,7 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
           required
         >
           <option value="">Select Department</option>
-          {departments.map(department => (
+          {departments.map((department) => (
             <option key={department._id} value={department._id}>
               {department.name}
             </option>
@@ -165,16 +166,17 @@ const EmployeeUpdateForm = ({ user, departments, setEmployees }) => {
           placeholder="Password"
           value={formData.password} // Bind value
           onChange={handleChange}
-          
         />
         <div className="d-flex justify-content-between mt-3">
-
-           <button type="submit" className="btn btn-warning btn-sm">Update</button>
-          <button type="button" onClick={() => window.history.back()}>Back</button>
+          <button type="submit" className="btn btn-warning btn-sm">
+            Update
+          </button>
+          <button type="button" onClick={() => window.history.back()}>
+            Back
+          </button>
         </div>
       </form>
     </div>
   )
 }
 export default EmployeeUpdateForm
-

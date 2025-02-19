@@ -1,0 +1,30 @@
+.createButton {
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  padding: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 5px;
+  text-decoration: none;
+  width: 15%;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .createButton {
+    width: 50%; /* Increase width for better mobile accessibility */
+    font-size: 0.9em; /* Slightly smaller text */
+    padding: 8px; /* Adjust padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .createButton {
+    width: 80%; /* Make it larger on very small screens */
+    font-size: 0.8em;
+    padding: 6px;
+  }
+}

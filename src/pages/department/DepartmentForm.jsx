@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../../servers/config'
-
+import '../../styles/home/Department.css'
 const DepartmentForm = ({ departments, setDepartments }) => {
   const navigate = useNavigate()
 
@@ -46,34 +46,39 @@ const DepartmentForm = ({ departments, setDepartments }) => {
     <div className="page">
       <div className="SigninForm">
         <div className="SigninBorders">
-          <form onSubmit={handleSubmit} className="signup-form">
+          <form onSubmit={handleSubmit} className="form-group">
             <h2>Create a Department</h2>
-
-            <label htmlFor="name" className="form-label">
-              Department Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="form-control border border-success rounded-3 shadow-sm"
-              value={formValues.name}
-              onChange={handleChange}
-              required
-            />
-
-            <label htmlFor="description" className="form-label">
-              Description:
-            </label>
-            <input
-              type="text"
-              id="description"
-              className="form-control border border-success rounded-3 shadow-sm"
-              value={formValues.description}
-              onChange={handleChange}
-              required
-            />
-
-            <button type="submit" className="btn btn-primary btn-lg w-100">
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Department Name:
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="form-control"
+                value={formValues.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="description" className="form-label">
+                Description:
+              </label>
+              <input
+                type="text"
+                id="description"
+                className="form-control"
+                value={formValues.description}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="createButton"
+              style={{ width: '100%' }}
+            >
               Create Department
             </button>
           </form>

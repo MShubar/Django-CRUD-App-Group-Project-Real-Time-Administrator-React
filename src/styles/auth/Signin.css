@@ -5,6 +5,7 @@
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  color: black;
 }
 
 /* Sign-in Form Container */
@@ -60,7 +61,7 @@
   border-radius: 10px;
   font-size: 16px;
   background: rgba(255, 255, 255, 0.3);
-  color: white;
+  color: black;
   text-align: center;
   outline: none;
   transition: 0.3s ease;
@@ -68,11 +69,6 @@
 
 .formClass input::placeholder {
   color: rgba(255, 255, 255, 0.7);
-}
-
-.formClass input:focus {
-  background: rgba(255, 255, 255, 0.5);
-  transform: scale(1.05);
 }
 
 /* Submit Button */
@@ -110,6 +106,72 @@
   font-size: 18px;
   font-weight: 500;
 }
+
+/* Upload Button */
+.SignupUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.custom-upload {
+  background: #ff8a00;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+.custom-upload:hover {
+  background: #e52e71;
+}
+
+/* Logo Preview */
+.logo-preview {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid #fff;
+}
+
+/* Styling for Select Dropdown */
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  appearance: none; /* Removes default dropdown arrow */
+  transition: 0.3s ease-in-out;
+}
+
+/* Add a custom arrow icon */
+select::after {
+  content: '▼';
+  font-size: 14px;
+  position: absolute;
+  right: 15px;
+  pointer-events: none;
+}
+
+/* Options inside select */
+option {
+  color: black;
+  background: white;
+}
+
 /* Media Query for Phones */
 @media (max-width: 768px) {
   /* Full-page Centering */

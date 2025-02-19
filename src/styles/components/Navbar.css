@@ -5,6 +5,7 @@
   align-items: center;
   padding: 15px 30px;
   color: white;
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   border-radius: 10%;
@@ -56,6 +57,7 @@
 
 .reg-btn .signin {
   background: transparent;
+
   color: white;
   border: 1px solid white;
 }
@@ -69,6 +71,7 @@
   background: rgb(165, 81, 42);
   color: white;
   border: none;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
 }
 
 .reg-btn .signup:hover {
