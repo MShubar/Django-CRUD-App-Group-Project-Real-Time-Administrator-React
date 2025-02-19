@@ -8,7 +8,7 @@ const CompanyDeleteConfirm = () => {
   const deleteCompany = async () => {
     console.log('Delete button clicked')
     const token = localStorage.getItem('token')
-    try {
+    //try {
       const response = await fetch(`${BASE_URL}/companies/delete/${id}`, {
         method: 'DELETE',
         headers: {
@@ -22,14 +22,13 @@ const CompanyDeleteConfirm = () => {
       if (!response.ok) {
         throw new Error('Failed to delete company')
       }
-
-      const updatedCompanies = companies.filter((company) => company._id !== id)
+     const updatedCompanies = companies.filter((company) => company._id !== id)
       setCompanies(updatedCompanies)
 
       navigate('/dashboard')
-    } catch (error) {
-      console.error('Error deleting department:', error)
-    }
+    // } catch (error) {
+    //   console.error('Error deleting department:', error)
+    // }
   }
 
   return (
@@ -37,10 +36,11 @@ const CompanyDeleteConfirm = () => {
       <h2>
         Are you sure you want to delete this company?
         <br />
-        <font color="red" size="5">
+        <font color="red" size="3">
           <b>
-            Deleting this department will also delete all employees associated
-            with it.
+            Deleting Your company account will also delete all associated data
+            with it. Employees, Users, Departments, Shifts all will be deleted as well.
+            Are you shure this is what you want to do?
           </b>
         </font>
       </h2>
