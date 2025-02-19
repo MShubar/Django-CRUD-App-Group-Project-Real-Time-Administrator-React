@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../../servers/config'
 
@@ -58,28 +58,41 @@ const DepartmentUpdateForm = ({ departments, setDepartments }) => {
       <div className="SigninForm">
         <div className="SigninBorders">
           <h1>Update Department</h1>
-          <form onSubmit={handleSubmit} className="signup-form">
-            <label htmlFor="name">Department Name:</label>
-            <input
-              type="text"
-              id="name"
-              value={formValues.name}
-              onChange={handleChange}
-            />
-            <br />
-
-            <label htmlFor="description">Description:</label>
-            <input
-              type="text"
-              id="description"
-              value={formValues.description}
-              onChange={handleChange}
-            />
-            <br />
-            <div className="d-flex justify-content-between mt-3">
-              <button type="submit">Submit Update</button>
-              <button onClick={() => navigate('/departmentlist')}>Back</button>
+          <form onSubmit={handleSubmit} className="form-group">
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Department Name:
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="form-control"
+                value={formValues.name}
+                onChange={handleChange}
+                required
+              />
             </div>
+            <div className="mb-3">
+              <label htmlFor="description" className="form-label">
+                Description:
+              </label>
+              <input
+                type="text"
+                id="description"
+                className="form-control"
+                value={formValues.description}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="createButton"
+              style={{ width: '100%' }}
+            >
+              Create Department
+            </button>
+            <button onClick={() => navigate(`/shift/${id}`)}>Back</button>
           </form>
         </div>
       </div>

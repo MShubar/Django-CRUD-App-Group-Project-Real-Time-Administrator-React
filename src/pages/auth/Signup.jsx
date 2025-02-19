@@ -127,7 +127,7 @@ function Signup() {
                 required
               />
             </div>
-            <div className="SignupInput">
+            <div className="SignupUpload">
               <label>Upload Logo:</label>
               <input
                 type="file"
@@ -137,7 +137,7 @@ function Signup() {
                 required
               />
             </div>
-            <div className="SignupInput">
+            <div className="SignupUpload">
               <label>Upload CR Document:</label>
               <input
                 type="file"

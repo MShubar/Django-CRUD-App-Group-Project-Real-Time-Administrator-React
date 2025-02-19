@@ -66,8 +66,8 @@ const ShiftUpdateForm = () => {
       <div className="SigninForm">
         <div className="SigninBorders">
           <h1>Edit Shift</h1>
-          <form onSubmit={handleSubmit} className="signup-form">
-            <label>Name</label>
+          <form onSubmit={handleSubmit} className="form-group">
+            <label className="form-label">Name</label>
             <input
               type="text"
               value={shift.name}
@@ -75,7 +75,7 @@ const ShiftUpdateForm = () => {
               required
             />
 
-            <label>Start Time</label>
+            <label className="form-label">Start Time</label>
             <input
               type="time"
               value={shift.startTime}
@@ -85,7 +85,7 @@ const ShiftUpdateForm = () => {
               required
             />
 
-            <label>End Time</label>
+            <label className="form-label">End Time</label>
             <input
               type="time"
               value={shift.endTime}
@@ -94,7 +94,11 @@ const ShiftUpdateForm = () => {
             />
 
             <div className="d-flex justify-content-between mt-3">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="createButton"
+                style={{ width: '100%' }}
+              >
                 Update Shift
               </button>
               <button onClick={() => navigate(`/shift/${id}`)}>Back</button>

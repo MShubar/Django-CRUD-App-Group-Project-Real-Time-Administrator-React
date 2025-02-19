@@ -49,6 +49,7 @@ function App() {
         isAuthenticated={isAuthenticated}
         role={user?.role}
         onLogout={handleLogout}
+        user={user}
       />
       <Routes>
         <Route path="/" element={<Home />} />

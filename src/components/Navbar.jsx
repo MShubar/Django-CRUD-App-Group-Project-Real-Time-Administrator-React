@@ -4,7 +4,7 @@ import LightDark from './Dark-Light-Button'
 import Logo from '../styles/Logo.svg'
 import Profile from './Profile'
 
-function Navbar({ isAuthenticated, role, onLogout }) {
+function Navbar({ isAuthenticated, role, onLogout, user }) {
   const handleClick = () => {
     onLogout()
   }
@@ -38,7 +38,7 @@ function Navbar({ isAuthenticated, role, onLogout }) {
         </div>
 
         <div className="reg-btn">
-          {isAuthenticated && <Profile />}
+          {isAuthenticated && <Profile user={user} />}
           <LightDark />
           {!isAuthenticated ? (
             <>

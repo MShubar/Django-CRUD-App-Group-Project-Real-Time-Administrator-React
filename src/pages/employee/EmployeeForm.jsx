@@ -64,75 +64,102 @@ const EmployeeForm = ({
   }
 
   return (
-    <div className="SignupPage">
-      <div className="SignupForm">
-        <div className="SignupBorders">
+    <div className="page">
+      <div className="SigninForm">
+        <div className="SigninBorders">
           <form onSubmit={handleSubmit} className="SignupFormClass">
             <h2>Add New Employee</h2>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="position"
-              placeholder="Position"
-              value={formData.position}
-              onChange={handleChange}
-              required
-            />
-            <label>Profile Image:</label>
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleFileChange}
-              required
-            />
-            <select
-              name="departmentId"
-              value={formData.departmentId}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Department</option>
-              {departments.map((department) => (
-                <option key={department._id} value={department._id}>
-                  {department.name}
-                </option>
-              ))}
-            </select>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a Status</option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-              <option value="Blocked">Blocked</option>
-            </select>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Name:
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="position" className="form-label">
+                Position
+              </label>
+              <input
+                type="text"
+                name="position"
+                placeholder="Position"
+                value={formData.position}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="SignupUpload">
+              <label>Profile Image:</label>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleFileChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <select
+                name="departmentId"
+                value={formData.departmentId}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Department</option>
+                {departments.map((department) => (
+                  <option key={department._id} value={department._id}>
+                    {department.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-3">
+              <select
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select a Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="Blocked">Blocked</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email:
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password:
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
             <button type="submit">Add Employee</button>
           </form>
         </div>

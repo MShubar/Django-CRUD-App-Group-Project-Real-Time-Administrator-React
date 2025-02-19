@@ -4,10 +4,9 @@ import { BASE_URL } from '../../servers/config'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../styles/employees/employeeDetails.css'
 const EmployeeDetails = ({ departments }) => {
-  const { employeeId } = useParams(); // Get the employee ID from the URL
+  const { employeeId } = useParams() // Get the employee ID from the URL
   //console.log("=========employeeId=======>", employeeId);
-  const [employee, setEmployee] = useState(null);
-
+  const [employee, setEmployee] = useState(null)
 
   useEffect(() => {
     const fetchEmployeeDetails = async () => {

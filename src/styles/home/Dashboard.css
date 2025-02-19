@@ -17,7 +17,7 @@
 
 .toggle-form-btn {
   padding: 10px 20px;
-  background: rgb(165, 81, 42);
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
   color: white;
   border: none;
   cursor: pointer;
@@ -58,7 +58,7 @@
 .submit-btn {
   width: 100%;
   padding: 10px;
-  background: rgb(165, 81, 42);
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
   color: white;
   border: none;
   cursor: pointer;
@@ -67,9 +67,8 @@
 }
 
 .submit-btn:hover {
-  background-color: #218838;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
 }
-
 .TextChange {
   color: white;
 }

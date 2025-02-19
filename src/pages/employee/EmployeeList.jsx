@@ -48,9 +48,9 @@ const EmployeeList = ({ employees, user, departments, setEmployees }) => {
   return (
     <div className="container my-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h1 className="text-primary">Employees List</h1>
+        <h1 style={{ color: 'white' }}>Employees List</h1>
         <button
-          className="btn btn-success"
+          className="createButton"
           onClick={() => setShowForm((prev) => !prev)}
         >
           {showForm ? 'Cancel' : 'New Employee'}

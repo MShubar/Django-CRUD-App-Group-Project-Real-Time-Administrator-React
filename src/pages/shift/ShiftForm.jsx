@@ -95,7 +95,11 @@ const ShiftForm = ({ shift, setShifts }) => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary w-100">
+            <button
+              type="submit"
+              className="createButton"
+              style={{ width: '100%' }}
+            >
               {shift ? 'Update Shift' : 'Create Shift'}
             </button>
           </form>

@@ -2,32 +2,37 @@ import React, { useState, useEffect } from 'react'
 import { BASE_URL } from '../servers/config'
 import '../styles/components/Profile.css'
 import { Link } from 'react-router-dom'
-function Profile() {
-  const [company, setCompany] = useState()
-
+function Profile({ user }) {
+  const companyId = user._id
+  const [company, setCompany] = useState([])
+  //console.log("=========companyIdddddddd=======>", companyId);
   useEffect(() => {
-    const fetchCompanies = async () => {
-      const token = localStorage.getItem('token')
+    const fetchCompanyDetails = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/companies/`, {
+        const response = await fetch(`${BASE_URL}/companies/${companyId}`, {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${localStorage.getItem('token')}` // Include the token if needed
           }
         })
+
+        // console.log("======response=========", response.ok);
+
         if (!response.ok) {
-          throw new Error('Failed to fetch companies')
+          throw new Error('Failed to fetch Company details')
         }
 
-        const data = await response.json()
-        setCompany(data)
+        const companyData = await response.json()
+        console.log('Fetched Company Data:', companyData)
+        setCompany(companyData)
       } catch (error) {
-        console.error('Error fetching companies:', error)
+        console.error('Error fetching Company details:', error)
       }
     }
 
-    fetchCompanies()
-  }, [])
+    fetchCompanyDetails()
+  }, [companyId])
 
   return (
     <div className="dropdown">
