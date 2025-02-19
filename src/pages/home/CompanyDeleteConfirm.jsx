@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { BASE_URL } from '../../servers/config'
 import { useState } from 'react'
-const CompanyDeleteConfirm = () => {
+const CompanyDeleteConfirm = ({setIsAuthenticated}) => {
   let navigate = useNavigate()
   const { id } = useParams()
   const [companies, setCompanies] = useState()
@@ -22,10 +22,11 @@ const CompanyDeleteConfirm = () => {
       if (!response.ok) {
         throw new Error('Failed to delete company')
       }
-     const updatedCompanies = companies.filter((company) => company._id !== id)
-      setCompanies(updatedCompanies)
-
-      navigate('/dashboard')
+    //  const updatedCompanies = companies.filter((company) => company._id !== id)
+    //   setCompanies(updatedCompanies)
+    localStorage.removeItem('token')
+    setIsAuthenticated(false)
+      navigate('/signin')
     // } catch (error) {
     //   console.error('Error deleting department:', error)
     // }

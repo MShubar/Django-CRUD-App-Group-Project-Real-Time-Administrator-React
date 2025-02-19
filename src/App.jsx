@@ -202,7 +202,7 @@ function App() {
         {user ? (
           <Route
             path="/editProfile/delete/:id"
-            element={<CompanyDeleteConfirm user={user} />}
+            element={<CompanyDeleteConfirm user={user} setIsAuthenticated={setIsAuthenticated}/>}
           />
         ) : null}
         <Route path="*" element={<NotFound />} />
