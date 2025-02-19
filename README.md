@@ -13,7 +13,7 @@ The Real Time Administrator is a platform that helps companies efficiently manag
 - Database: MongoDB
 - API Testing: Postman
 - Authentication: User sessions for login and management
-- Styling: Bootstrap for responsive design
+- Styling: CSS, SASS
 
 ## Next Steps: Upcoming Improvements & Additions
 - Minor tweaks in UI
