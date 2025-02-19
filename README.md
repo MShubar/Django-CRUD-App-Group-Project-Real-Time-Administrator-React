@@ -5,7 +5,7 @@ The Real Time Administrator is a platform that helps companies efficiently manag
 
 # Deployed link: 
 
-# Backend GitHub Repository: https://github.com/MShubar/Django-CRUD-App-Group-Project-Real-Time-Administrator-Express.git
+# Backend GitHub Repository: https://github.com/MShubar/MERN-CRUD-App-Group-Project-Real-Time-Administrator-Express.git
 
 ## Technologies Used
 - Backend: Express.js
