@@ -14,6 +14,7 @@ The Real Time Administrator is a platform that helps companies efficiently manag
 - API Testing: Postman
 - Authentication: User sessions for login and management
 - Styling: CSS, SASS
+- Tools: Microsoft Azure
 
 ## Next Steps: Upcoming Improvements & Additions
 - Minor tweaks in UI
